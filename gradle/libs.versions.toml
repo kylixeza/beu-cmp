@@ -24,6 +24,7 @@ compottie = "2.0.0-beta02"
 kottie = "1.9.6"
 kermit = "2.0.4"
 datastore = "1.1.0-beta02"
+stackedSnackbar = "1.0.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -68,6 +69,9 @@ kermit-log = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 # Datastore
 datastore-core-okio = { group = "androidx.datastore", name = "datastore-core-okio", version.ref = "datastore" }
 datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
+
+# StackedSnackbar
+stackedSnackbar = { group = "io.github.rizmaulana", name = "compose-stacked-snackbar", version.ref = "stackedSnackbar" }
 
 
 [plugins]

@@ -1,7 +1,7 @@
 package com.kylix.onboard.screen
 
+import beukmm.base.BaseScreenModel
 import beukmm.models.OnBoardContent
-import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.kylix.core.repositories.SplashRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class OnBoardScreenModel(
     private val splashRepository: SplashRepository
-): ScreenModel {
+): BaseScreenModel() {
 
     val onBoardContent = MutableStateFlow(
         listOf(
@@ -32,12 +32,10 @@ class OnBoardScreenModel(
         )
     ).asStateFlow()
 
-    fun passOnBoarding(
-        afterPass: () -> Unit
-    ) {
+    fun passOnBoarding() {
         screenModelScope.launch {
-            splashRepository.passOnBoarding()
-            afterPass()
+            onSuspendProcess { splashRepository.passOnBoarding() }
+            onDataSuccess()
         }
     }
 
