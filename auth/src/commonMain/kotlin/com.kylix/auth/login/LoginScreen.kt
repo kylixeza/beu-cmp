@@ -104,7 +104,8 @@ class LoginScreen: Screen {
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Primary500
                     ),
-                    contentPadding = PaddingValues(8.dp)
+                    contentPadding = PaddingValues(8.dp),
+                    enabled = loginState.identifier.isNotBlank() && loginState.password.isNotBlank()
                 ) {
                     Text(
                         text = "Login",
