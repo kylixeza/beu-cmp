@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -74,7 +75,7 @@ class LoginScreen: Screen {
                     label = "Email / Username",
                     singleLine = true
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 BeuBasicTextField(
                     value = loginState.password,
@@ -83,7 +84,10 @@ class LoginScreen: Screen {
                     singleLine = true,
                     visualTransformation = if (loginState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     trailingIcon = {
-                        IconButton(onClick = { screenModel.onPasswordVisibilityChanged() }) {
+                        IconButton(
+                            modifier = Modifier.size(24.dp),
+                            onClick = { screenModel.onPasswordVisibilityChanged() }
+                        ) {
                             Icon(
                                 imageVector = if (loginState.isPasswordVisible) FeatherIcons.EyeOff else FeatherIcons.Eye,
                                 contentDescription = if (loginState.isPasswordVisible) "Hide password" else "Show password"

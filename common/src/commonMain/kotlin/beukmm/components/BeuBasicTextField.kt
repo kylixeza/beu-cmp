@@ -62,7 +62,7 @@ fun BeuBasicTextField(
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
             .background(White)
-            .padding(12.dp)
+            .padding(16.dp)
             .heightIn(min = minSize, max = maxSize),
         enabled = enabled,
         readOnly = readOnly,
@@ -106,13 +106,18 @@ fun BeuBasicTextField(
                     ) { leadingIcon.invoke() }
                 }
 
-                if (value.isEmpty()) {
-                    Text(
-                        modifier = Modifier.weight(8f),
-                        text = label,
-                        textAlign = TextAlign.Start,
-                        style = TextStyle(color = Color.Gray, fontSize = 16.sp),
-                    )
+                Box(
+                    modifier.weight(8f)
+                ) {
+                    if (value.isEmpty()) {
+                        Text(
+                            text = label,
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.body1.copy(
+                                color = Color.LightGray
+                            ),
+                        )
+                    }
                 }
 
                 if (trailingIcon != null) {
