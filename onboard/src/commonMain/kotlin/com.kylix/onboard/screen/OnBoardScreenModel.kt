@@ -3,7 +3,7 @@ package com.kylix.onboard.screen
 import beukmm.base.BaseScreenModel
 import beukmm.models.OnBoardContent
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.kylix.core.repositories.SplashRepository
+import com.kylix.core.repositories.splash.SplashRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

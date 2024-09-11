@@ -1,4 +1,4 @@
-package com.kylix.core.repositories
+package com.kylix.core.repositories.splash
 
 interface SplashRepository {
 

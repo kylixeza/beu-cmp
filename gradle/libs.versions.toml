@@ -24,7 +24,10 @@ compottie = "2.0.0-beta02"
 kottie = "1.9.6"
 kermit = "2.0.4"
 datastore = "1.1.0-beta02"
-stackedSnackbar = "1.0.3"
+stackedSnackbar = "1.0.4"
+ktorClient = "2.3.12"
+result = "2.0.0"
+composeIcons = "1.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -73,6 +76,29 @@ datastore-preferences-core = { group = "androidx.datastore", name = "datastore-p
 # StackedSnackbar
 stackedSnackbar = { group = "io.github.rizmaulana", name = "compose-stacked-snackbar", version.ref = "stackedSnackbar" }
 
+# Ktor
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorClient" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorClient" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorClient" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorClient" }
+ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktorClient" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorClient" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktorClient" }
+
+# Result
+result = { group = "com.michael-bull.kotlin-result", name = "kotlin-result", version.ref = "result" }
+
+# Icons
+composeIcons-cssGg = { module = "br.com.devsrsouza.compose.icons:css-gg", version.ref = "composeIcons" }
+composeIcons-weatherIcons = { module = "br.com.devsrsouza.compose.icons:erikflowers-weather-icons", version.ref = "composeIcons" }
+composeIcons-evaIcons = { module = "br.com.devsrsouza.compose.icons:eva-icons", version.ref = "composeIcons" }
+composeIcons-feather = { module = "br.com.devsrsouza.compose.icons:feather", version.ref = "composeIcons" }
+composeIcons-fontAwesome = { module = "br.com.devsrsouza.compose.icons:font-awesome", version.ref = "composeIcons" }
+composeIcons-lineAwesome = { module = "br.com.devsrsouza.compose.icons:line-awesome", version.ref = "composeIcons" }
+composeIcons-linea = { module = "br.com.devsrsouza.compose.icons:linea", version.ref = "composeIcons" }
+composeIcons-octicons = { module = "br.com.devsrsouza.compose.icons:octicons", version.ref = "composeIcons" }
+composeIcons-simpleIcons = { module = "br.com.devsrsouza.compose.icons:simple-icons", version.ref = "composeIcons" }
+composeIcons-tablerIcons = { module = "br.com.devsrsouza.compose.icons:tabler-icons", version.ref = "composeIcons" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -81,9 +107,12 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-screen-model", "voyger-transitions", "voyager-koin"]
 koin = ["koin-core", "koin-compose"]
 accompanist = ["accompanist-pager", "accompanist-pager-indicators"]
 datastore = ["datastore-core-okio", "datastore-preferences-core"]
+ktor = ["ktor-client-core", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-client-logging", "ktor-client-auth"]
+composeIcons = ["composeIcons-cssGg", "composeIcons-weatherIcons", "composeIcons-evaIcons", "composeIcons-feather", "composeIcons-fontAwesome", "composeIcons-lineAwesome", "composeIcons-linea", "composeIcons-octicons", "composeIcons-simpleIcons", "composeIcons-tablerIcons"]

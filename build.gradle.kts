@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.nativeCocoapods) apply false
+    alias(libs.plugins.kotlinSerialization)
 }
 
 subprojects {

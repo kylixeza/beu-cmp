@@ -1,4 +1,4 @@
-package com.kylix.core.repositories
+package com.kylix.core.repositories.splash
 
 import com.kylix.core.data.local.BeuDataStore
 

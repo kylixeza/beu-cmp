@@ -32,6 +32,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.bundles.voyager)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.composeIcons)
+
+            implementation(libs.result)
 
             api(projects.common)
             api(projects.core)
