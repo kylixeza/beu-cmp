@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import beukmm.components.LoadingDialog
+import beukmm.theme.White
 import rememberStackedSnackbarHostState
 
 @Composable
@@ -38,8 +39,8 @@ fun BaseScreenContent(
     drawerBackgroundColor: Color = MaterialTheme.colors.surface,
     drawerContentColor: Color = contentColorFor(drawerBackgroundColor),
     drawerScrimColor: Color = DrawerDefaults.scrimColor,
-    backgroundColor: Color = MaterialTheme.colors.background,
-    contentColor: Color = contentColorFor(backgroundColor),
+    backgroundColor: Color = White,
+    contentColor: Color = White,
     uiState: BaseUIState? = null,
     onLoadingDialogDismissRequest: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit

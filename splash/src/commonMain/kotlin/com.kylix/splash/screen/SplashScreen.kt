@@ -11,14 +11,21 @@ import beukmm.common.generated.resources.Res
 import beukmm.common.generated.resources.beu_icon
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 
 class SplashScreen : Screen {
+
+    override val key: ScreenKey
+        get() = uniqueScreenKey
 
     @Composable
     override fun Content() {

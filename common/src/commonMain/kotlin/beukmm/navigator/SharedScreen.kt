@@ -6,4 +6,5 @@ sealed class SharedScreen: ScreenProvider {
     data object Splash : SharedScreen()
     data object OnBoard : SharedScreen()
     data object Login : SharedScreen()
+    data object Register: SharedScreen()
 }

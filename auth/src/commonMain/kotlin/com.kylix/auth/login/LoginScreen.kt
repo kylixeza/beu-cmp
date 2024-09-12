@@ -1,8 +1,10 @@
 package com.kylix.auth.login
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,28 +17,29 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import beukmm.base.BaseScreenContent
 import beukmm.components.BeuBasicTextField
-import beukmm.components.LoadingDialog
 import beukmm.di.koinScreenModel
+import beukmm.navigator.SharedScreen
+import beukmm.theme.Black
 import beukmm.theme.Primary500
 import beukmm.theme.White
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Eye
 import compose.icons.feathericons.EyeOff
@@ -46,11 +49,13 @@ class LoginScreen: Screen {
     @Composable
     override fun Content() {
 
-        val navigator = LocalNavigator.current
+        val navigator = LocalNavigator.currentOrThrow
 
         val screenModel = koinScreenModel<LoginScreenModel>()
         val loginState = screenModel.loginState.collectAsState().value
         val uiState = screenModel.uiState.collectAsState().value
+
+        val registerScreen = rememberScreen(SharedScreen.Register)
 
         BaseScreenContent(
             uiState = uiState,
@@ -90,7 +95,8 @@ class LoginScreen: Screen {
                         ) {
                             Icon(
                                 imageVector = if (loginState.isPasswordVisible) FeatherIcons.EyeOff else FeatherIcons.Eye,
-                                contentDescription = if (loginState.isPasswordVisible) "Hide password" else "Show password"
+                                contentDescription = if (loginState.isPasswordVisible) "Hide password" else "Show password",
+                                tint = Black
                             )
                         }
                     }
@@ -113,6 +119,21 @@ class LoginScreen: Screen {
                         style = MaterialTheme.typography.body1.copy(
                             color = White
                         ),
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text("Don't have an account? ")
+                    Text(
+                        text = "Register",
+                        color = MaterialTheme.colors.primary,
+                        modifier = Modifier.clickable {
+                            navigator.push(registerScreen)
+                        }
                     )
                 }
             }
