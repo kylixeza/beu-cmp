@@ -36,4 +36,15 @@ class BeuDataStore(
         return preferences[token].orEmpty()
     }
 
+    suspend fun clearToken() {
+        dataStore.edit { preferences ->
+            preferences.remove(token)
+        }
+    }
+
+    suspend fun isTokenExist(): Boolean {
+        val preferences = dataStore.data.first()
+        return preferences[token] != null
+    }
+
 }

@@ -13,4 +13,8 @@ class SplashRepositoryImpl(
     override suspend fun isOnBoardingPassed(): Boolean {
         return beuDataStore.getIsPassOnBoarding()
     }
+
+    override suspend fun isTokenExist(): Boolean {
+        return beuDataStore.isTokenExist()
+    }
 }

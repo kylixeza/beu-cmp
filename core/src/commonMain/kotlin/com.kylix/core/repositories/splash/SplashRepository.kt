@@ -6,4 +6,5 @@ interface SplashRepository {
 
     suspend fun isOnBoardingPassed(): Boolean
 
+    suspend fun isTokenExist(): Boolean
 }

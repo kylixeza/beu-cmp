@@ -4,7 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -22,25 +23,27 @@ kotlin {
 
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
-        }
         commonMain.dependencies {
-            implementation(libs.bundles.koin)
-            implementation(libs.bundles.datastore)
-            implementation(libs.bundles.ktor)
-            implementation(libs.result)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
+            implementation(libs.bundles.voyager)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.composeIcons)
             implementation(libs.kermit.log)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
+
+            api(projects.common)
+            api(projects.core)
         }
     }
 }
 
 android {
-    namespace = "com.kylix.core"
+    namespace = "com.kylix.main"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -48,5 +51,8 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+    buildFeatures {
+        compose = true
     }
 }

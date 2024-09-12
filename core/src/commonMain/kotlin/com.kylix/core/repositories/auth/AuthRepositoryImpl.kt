@@ -1,5 +1,6 @@
 package com.kylix.core.repositories.auth
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
@@ -29,6 +30,7 @@ class AuthRepositoryImpl(
             val result = response.bodyAsText()
             return if (response.status.value in (200..299)) {
                 val token = Json.decodeFromString(BaseResponse.serializer(TokenResponse.serializer()), result)
+                Logger.i("Token: ${token.data?.token.orEmpty()}")
                 dataStore.saveToken(token.data?.token.orEmpty())
                 Ok(Success(Unit))
             } else {

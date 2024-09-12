@@ -19,6 +19,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +51,7 @@ class LoginScreen: Screen {
     override fun Content() {
 
         val navigator = LocalNavigator.currentOrThrow
+        val mainScreen = rememberScreen(SharedScreen.Main)
 
         val screenModel = koinScreenModel<LoginScreenModel>()
         val loginState = screenModel.loginState.collectAsState().value
@@ -136,6 +138,12 @@ class LoginScreen: Screen {
                         }
                     )
                 }
+            }
+        }
+
+        LaunchedEffect(uiState.isSuccess) {
+            if (uiState.isSuccess) {
+                navigator.replace(mainScreen)
             }
         }
     }

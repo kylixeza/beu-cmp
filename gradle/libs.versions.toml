@@ -48,6 +48,7 @@ voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator",
 voyager-screen-model = { group = "cafe.adriel.voyager", name = "voyager-screenmodel", version.ref = "voyager" }
 voyger-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
 voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
+voyager-tab = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
 
 # Koin
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinComposeMultiplatform" }
@@ -110,7 +111,7 @@ nativeCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
-voyager = ["voyager-navigator", "voyager-screen-model", "voyger-transitions", "voyager-koin"]
+voyager = ["voyager-navigator", "voyager-screen-model", "voyger-transitions", "voyager-koin", "voyager-tab"]
 koin = ["koin-core", "koin-compose"]
 accompanist = ["accompanist-pager", "accompanist-pager-indicators"]
 datastore = ["datastore-core-okio", "datastore-preferences-core"]

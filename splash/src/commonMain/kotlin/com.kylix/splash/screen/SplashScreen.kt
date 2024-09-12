@@ -24,25 +24,29 @@ import org.jetbrains.compose.resources.painterResource
 
 class SplashScreen : Screen {
 
-    override val key: ScreenKey
-        get() = uniqueScreenKey
-
     @Composable
     override fun Content() {
 
         val navigator = LocalNavigator.currentOrThrow
         val onboardScreen = rememberScreen(SharedScreen.OnBoard)
         val loginScreen = rememberScreen(SharedScreen.Login)
+        val mainScreen = rememberScreen(SharedScreen.Main)
 
         val screenModel = koinScreenModel<SplashScreenModel>()
-        val isPassOnBoarding = screenModel.isPassOnBoarding.collectAsState()
+        val route = screenModel.route.collectAsState().value
 
-        LaunchedEffect(Unit) {
-            delay(1000L)
+        LaunchedEffect(route) {
+            if (route != null) {
+                delay(1000L)
 
-            navigator.replace(
-                if (isPassOnBoarding.value) loginScreen else onboardScreen
-            )
+                navigator.replace(
+                    when (route) {
+                        Route.ONBOARD -> onboardScreen
+                        Route.LOGIN -> loginScreen
+                        Route.MAIN -> mainScreen
+                    }
+                )
+            }
         }
 
         Image(

@@ -32,6 +32,7 @@ kotlin {
             api(projects.splash)
             api(projects.onboard)
             api(projects.auth)
+            api(projects.main)
 
             implementation(libs.bundles.koin)
             implementation(libs.bundles.voyager)
