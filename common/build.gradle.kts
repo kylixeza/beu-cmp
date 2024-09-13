@@ -23,6 +23,12 @@ kotlin {
 
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.core.ktx)
+            implementation(libs.androidx.appcompat)
+            implementation(libs.androidx.activity.compose)
+        }
+
         commonMain.dependencies {
             implementation(compose.material)
             implementation(compose.runtime)
