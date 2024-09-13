@@ -1,4 +1,4 @@
-package com.kylix.main.screens
+package com.kylix.main.tabs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,12 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import compose.icons.feathericons.Camera
+import compose.icons.feathericons.User
 
-object CameraTab: Tab {
+object ProfileTab: Tab {
 
     @Composable
     override fun Content() {
@@ -21,20 +20,20 @@ object CameraTab: Tab {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
         ) {
-            Text("Camera Screen")
+            Text("Profile Screen")
         }
     }
 
     override val options: TabOptions
         @Composable
         get() {
-            val icon = rememberVectorPainter(image = compose.icons.FeatherIcons.Camera)
+            val icon = rememberVectorPainter(image = compose.icons.FeatherIcons.User)
 
             return remember {
                 TabOptions(
-                    index = 1u,
+                    index = 2u,
                     icon = icon,
-                    title = "Camera"
+                    title = "Profile"
                 )
             }
         }

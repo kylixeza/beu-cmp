@@ -38,15 +38,12 @@ kotlin {
 
             api(projects.common)
             api(projects.core)
-            implementation(projects.home)
-            implementation(projects.camera)
-            implementation(projects.profile)
         }
     }
 }
 
 android {
-    namespace = "com.kylix.main"
+    namespace = "com.kylix.home"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -54,8 +51,5 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    buildFeatures {
-        compose = true
     }
 }

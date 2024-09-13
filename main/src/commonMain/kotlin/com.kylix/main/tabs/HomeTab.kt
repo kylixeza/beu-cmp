@@ -1,26 +1,30 @@
-package com.kylix.main.screens
+package com.kylix.main.tabs
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.navigator.CurrentScreen
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.kylix.home.HomeScreen
 import compose.icons.feathericons.Home
+import kotlin.jvm.Transient
 
-object HomeTab: Tab {
+class HomeTab(
+    @Transient
+    val onNavigator: (isRoot: Boolean) -> Unit
+): Tab {
 
     @Composable
     override fun Content() {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text("Home Screen")
+
+        Navigator(HomeScreen()) { navigator ->
+            LaunchedEffect(navigator.lastItem) {
+                onNavigator(navigator.lastItem is HomeScreen)
+            }
+            CurrentScreen()
         }
     }
 
