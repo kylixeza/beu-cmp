@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import beukmm.components.LoadingDialog
+import beukmm.components.PlatformColors
 import beukmm.theme.White
 import rememberStackedSnackbarHostState
 
@@ -43,10 +44,14 @@ fun BaseScreenContent(
     contentColor: Color = White,
     uiState: BaseUIState? = null,
     onLoadingDialogDismissRequest: () -> Unit = {},
+    statusBarColor: Color = Color.Transparent,
+    navBarColor: Color = Color.Transparent,
     content: @Composable (PaddingValues) -> Unit
 ) {
 
     val stackedSnackbarHostState = rememberStackedSnackbarHostState()
+
+    PlatformColors(statusBarColor, navBarColor)
 
     Scaffold(
         modifier = modifier,
