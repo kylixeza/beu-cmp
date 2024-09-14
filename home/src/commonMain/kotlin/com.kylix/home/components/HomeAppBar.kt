@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import beukmm.theme.Primary500
+import beukmm.theme.Primary700
 import beukmm.theme.White
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Search
@@ -28,7 +28,7 @@ fun HomeAppbar(
 ) {
     Row(
         modifier = modifier.fillMaxWidth()
-            .background(Primary500)
+            .background(Primary700)
             .padding(start = 16.dp, end = 16.dp, top = 32.dp, bottom = 12.dp),
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween

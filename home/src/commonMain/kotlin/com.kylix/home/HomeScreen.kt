@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.components.RecipeItemHorizontal
 import beukmm.di.koinScreenModel
-import beukmm.theme.Primary500
+import beukmm.theme.Primary700
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.screen.Screen
@@ -54,7 +54,7 @@ class HomeScreen : Screen {
             },
             uiState = uiState,
             onLoadingDialogDismissRequest = { screenModel.onFinishLoading() },
-            statusBarColor = Primary500
+            statusBarColor = Primary700
         ) { innerPadding ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -64,7 +64,7 @@ class HomeScreen : Screen {
                 item {
                     Text(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-                        text = "Category",
+                        text = "Categories",
                         style = MaterialTheme.typography.body1.copy(
                             fontWeight = FontWeight.SemiBold
                         )

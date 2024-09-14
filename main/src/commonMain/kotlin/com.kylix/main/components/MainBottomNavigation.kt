@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import beukmm.theme.Primary500
+import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -68,7 +69,7 @@ fun BottomNavItem(
     )
 
     val backgroundColor by animateColorAsState(
-        targetValue = if (isSelected) Primary500.copy(alpha = 0.1f) else Color.Transparent,
+        targetValue = if (isSelected) Primary700.copy(alpha = 0.1f) else Color.Transparent,
         animationSpec = tween(durationMillis = 300)
     )
 
@@ -90,7 +91,7 @@ fun BottomNavItem(
             Icon(
                 painter = icon,
                 contentDescription = label,
-                tint = if (isSelected) Primary500 else Color.LightGray,
+                tint = if (isSelected) Primary700 else Color.LightGray,
             )
         }
 
@@ -99,7 +100,7 @@ fun BottomNavItem(
         ) {
             Text(
                 text = label,
-                color = Primary500,
+                color = Primary700,
                 style = MaterialTheme.typography.body2
             )
         }
