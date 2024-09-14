@@ -6,6 +6,7 @@ import com.kylix.core.di.dataStorePlatformModule
 import com.kylix.core.di.networkModule
 import com.kylix.core.di.networkPlatformModule
 import com.kylix.core.di.repositoriesModule
+import com.kylix.home.di.homeModule
 import com.kylix.onboard.di.onBoardModule
 import com.kylix.splash.di.splashModule
 import org.koin.core.context.startKoin
@@ -24,7 +25,8 @@ fun installKoin(
             repositoriesModule,
             splashModule,
             onBoardModule,
-            authModule
+            authModule,
+            homeModule,
         )
     }
 }

@@ -30,42 +30,42 @@ fun BeuTypography() = Typography(
     h1 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp,
-        color = Black,
+        color = Neutral900,
     ),
     h2 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp,
-        color = Black,
+        color = Neutral900,
     ),
     h3 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
-        color = Black,
+        color = Neutral900,
     ),
     h4 = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp,
-        color = Black,
+        color = Neutral900,
     ),
     h5 = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
-        color = Black,
+        color = Neutral900,
     ),
     h6 = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 14.sp,
-        color = Black,
+        color =Neutral900,
     ),
 
     body1 = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        color = Black,
+        color = Neutral900,
     ),
     body2 = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        color = Black,
+        color = Neutral900,
     ),
 )

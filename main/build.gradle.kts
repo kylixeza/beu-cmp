@@ -38,9 +38,9 @@ kotlin {
 
             api(projects.common)
             api(projects.core)
-            implementation(projects.home)
-            implementation(projects.camera)
-            implementation(projects.profile)
+            api(projects.home)
+            api(projects.camera)
+            api(projects.profile)
         }
     }
 }

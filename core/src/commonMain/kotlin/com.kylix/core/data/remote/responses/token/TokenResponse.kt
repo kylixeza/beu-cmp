@@ -1,4 +1,4 @@
-package com.kylix.core.data.remote.responses
+package com.kylix.core.data.remote.responses.token
 
 import kotlinx.serialization.Serializable
 

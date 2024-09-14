@@ -35,13 +35,15 @@ open class BaseScreenModel: ScreenModel {
         }
     }
 
-    protected suspend fun onDataError(message: String) {
-        _uiState.update {
-            it.copy(isLoading = false, isError = true, errorMessage = message)
-        }
-        delay(100)
-        _uiState.update {
-            it.copy(isError = false, errorMessage = "")
+    protected fun onDataError(message: String) {
+        screenModelScope.launch {
+            _uiState.update {
+                it.copy(isLoading = false, isError = true, errorMessage = message)
+            }
+            delay(100)
+            _uiState.update {
+                it.copy(isError = false, errorMessage = "")
+            }
         }
     }
 

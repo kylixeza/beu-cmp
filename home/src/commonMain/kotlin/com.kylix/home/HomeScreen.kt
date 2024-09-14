@@ -1,42 +1,131 @@
 package com.kylix.home
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import beukmm.navigator.SharedScreen
-import cafe.adriel.voyager.core.registry.rememberScreen
+import beukmm.base.BaseScreenContent
+import beukmm.components.RecipeItemHorizontal
+import beukmm.di.koinScreenModel
+import beukmm.theme.Primary500
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import com.kylix.home.components.CategoryItem
+import com.kylix.home.components.HomeAppbar
 
 class HomeScreen : Screen {
 
+    @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
 
         val navigator = LocalNavigator.current
-        val loginScreen = rememberScreen(SharedScreen.Register)
 
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("Home Screen")
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(
-                onClick = {
-                    navigator?.push(loginScreen)
-                },
+        val screenModel = koinScreenModel<HomeScreenModel>()
+        val uiState by screenModel.uiState.collectAsState()
+        val homeState by screenModel.homeState.collectAsState()
+
+        val scrollState = rememberScrollState()
+
+        LifecycleEffectOnce {
+            screenModel.getHomeDate()
+        }
+
+        BaseScreenContent(
+            modifier = Modifier.fillMaxWidth(),
+            topBar = {
+                HomeAppbar(
+                    greeting = homeState.greet,
+                    onSearchClick = {  }
+                )
+            },
+            uiState = uiState,
+            onLoadingDialogDismissRequest = { screenModel.onFinishLoading() },
+            statusBarColor = Primary500
+        ) { innerPadding ->
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(top = 12.dp, bottom = 86.dp)
             ) {
-                Text("Back To Splash")
+
+                item {
+                    Text(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                        text = "Category",
+                        style = MaterialTheme.typography.body1.copy(
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentPadding = PaddingValues(horizontal = 12.dp)
+                    ) {
+                        items(homeState.categories) {
+                            CategoryItem(category = it)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+
+                items(homeState.homeRecipes) {
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                        text = it.title,
+                        style = MaterialTheme.typography.body1.copy(
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    if (it.subtitle != null) {
+                        Text(
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                            text = it.subtitle.orEmpty(),
+                            style = MaterialTheme.typography.body2
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentPadding = PaddingValues(horizontal = 12.dp)
+                    ) {
+                        items(it.recipes) { recipe ->
+                            RecipeItemHorizontal(
+                                imageUrl = recipe.image,
+                                isExclusive = false,
+                                difficulty = recipe.difficulty,
+                                foodName = recipe.name,
+                                favoritesCount = recipe.favorites,
+                                rating = recipe.rating,
+                                cookTime = recipe.estimationTime
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
             }
         }
     }

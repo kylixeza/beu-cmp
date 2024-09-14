@@ -39,6 +39,9 @@ kotlin {
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.composeIcons)
+
+            implementation(libs.kamel)
+
             api(libs.stackedSnackbar)
         }
     }

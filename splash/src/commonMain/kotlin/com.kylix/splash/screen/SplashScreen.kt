@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import beukmm.base.BaseScreenContent
 import beukmm.common.generated.resources.Res
 import beukmm.common.generated.resources.beu_icon
 import beukmm.di.koinScreenModel
@@ -46,7 +47,7 @@ class SplashScreen : Screen {
             }
         }
 
-        BeuTheme {
+        BaseScreenContent {
             Image(
                 modifier = Modifier.fillMaxSize()
                     .graphicsLayer {
