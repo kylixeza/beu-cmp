@@ -30,6 +30,7 @@ ktorClient = "2.3.12"
 result = "2.0.0"
 composeIcons = "1.1.0"
 kamel = "0.9.5"
+datetime = "0.6.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -109,6 +110,9 @@ kamel = { group = "media.kamel", name = "kamel-image", version.ref = "kamel" }
 # Android Media 3
 androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "androidx-media3" }
 androidx-media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "androidx-media3" }
+
+# DateTime
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

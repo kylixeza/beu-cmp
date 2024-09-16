@@ -1,27 +1,19 @@
 package com.kylix.detail
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +24,6 @@ import beukmm.common.generated.resources.ic_unfavorite_white
 import beukmm.components.BaseAppBar
 import beukmm.di.koinScreenModel
 import beukmm.theme.Error500
-import beukmm.theme.Neutral900
 import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
@@ -40,13 +31,9 @@ import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import cafe.adriel.voyager.navigator.tab.TabNavigator
-import co.touchlab.kermit.Logger
 import com.kylix.detail.components.DetailTabNavigation
+import com.kylix.detail.components.ReviewSnacker
 import com.kylix.detail.components.VideoPlayer
-import com.kylix.detail.tabs.AboutTab
-import com.kylix.detail.tabs.InstructionTab
-import com.kylix.detail.tabs.ReviewTab
 
 class DetailScreen(
     private val recipeId: String
@@ -75,6 +62,25 @@ class DetailScreen(
                     rightIconTint = if (detailState.isFavorite) Error500 else White,
                     onRightIconClick = { screenModel.toggleFavorite(recipeId) }
                 )
+                AnimatedVisibility(
+                    visible = detailState.showReviewSnacker,
+                    enter = slideInVertically(
+                        initialOffsetY = { -it }
+                    ),
+                    exit = slideOutVertically(
+                        targetOffsetY = { -it }
+                    )
+                ) {
+                    ReviewSnacker(
+                        cookingSessionDuration = detailState.cookingSessionTime,
+                        onCloseReview = {
+                            screenModel.onCloseReviewSnacker()
+                        },
+                        onReviewNow = {
+
+                        }
+                    )
+                }
             },
             uiState = uiState,
             onLoadingDialogDismissRequest = {
@@ -97,7 +103,7 @@ class DetailScreen(
                             modifier = Modifier.fillMaxSize(),
                             url = detailState.recipe?.video.orEmpty(),
                             onVideoFinished = {
-                                Logger.i("Video Finished")
+                                screenModel.onVideoFinished()
                             }
                         )
                     }

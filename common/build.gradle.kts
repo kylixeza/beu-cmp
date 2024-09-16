@@ -40,7 +40,9 @@ kotlin {
             implementation(libs.bundles.koin)
             implementation(libs.bundles.composeIcons)
 
+            implementation(libs.kermit.log)
             implementation(libs.kamel)
+            implementation(libs.kotlinx.datetime)
 
             api(libs.stackedSnackbar)
         }

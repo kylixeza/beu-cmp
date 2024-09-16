@@ -1,7 +1,9 @@
 package com.kylix.detail
 
 import beukmm.base.BaseScreenModel
+import beukmm.util.TimerBenchmark
 import cafe.adriel.voyager.core.model.screenModelScope
+import co.touchlab.kermit.Logger
 import com.kylix.core.model.RecipeDetail
 import com.kylix.core.repositories.favorite.FavoriteRepository
 import com.kylix.core.repositories.recipe.RecipeRepository
@@ -18,6 +20,8 @@ class DetailScreenModel(
     var detailState = MutableStateFlow(DetailState())
         private set
 
+    private val timer = TimerBenchmark()
+
     fun getRecipeDetail(
         recipeId: String
     ) {
@@ -27,6 +31,7 @@ class DetailScreenModel(
                     detailState.update {
                         it.copy(recipe = data, isFavorite = data.isFavorite)
                     }
+                    timer.start()
                 },
                 onError = {
                     onDataError(it)
@@ -63,9 +68,29 @@ class DetailScreenModel(
             }
         }
     }
+
+    fun onVideoFinished() {
+        timer.stop()
+        val elapsedTime = timer.elapsedTime()
+        Logger.i("Elapsed Time: $elapsedTime")
+        detailState.update {
+            it.copy(cookingSessionTime = timer.convertToMinutes(elapsedTime))
+        }
+        detailState.update {
+            it.copy(showReviewSnacker = true)
+        }
+    }
+
+    fun onCloseReviewSnacker() {
+        detailState.update {
+            it.copy(showReviewSnacker = false)
+        }
+    }
 }
 
 data class DetailState(
     val recipe: RecipeDetail? = null,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val showReviewSnacker: Boolean = false,
+    val cookingSessionTime: String = ""
 )
