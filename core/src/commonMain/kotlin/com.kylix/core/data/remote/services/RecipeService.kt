@@ -10,4 +10,6 @@ class RecipeService(
     suspend fun getCategories() = client.get("categories")
 
     suspend fun getHomeRecipes() = client.get("recipes/home")
+
+    suspend fun getRecipeDetail(recipeId: String) = client.get("recipes/$recipeId")
 }

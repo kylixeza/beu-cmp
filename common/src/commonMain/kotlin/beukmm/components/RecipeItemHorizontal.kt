@@ -1,6 +1,7 @@
 package beukmm.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,6 +60,7 @@ fun RecipeItemHorizontal(
     favoritesCount: Long,
     rating: Double,
     cookTime: Int,
+    onItemClick: () -> Unit = {}
 ) {
 
     val cardDifficultyColor = when (difficulty) {
@@ -80,7 +82,8 @@ fun RecipeItemHorizontal(
     Card(
         modifier = modifier
             .width(IntrinsicSize.Min)
-            .padding(end = 20.dp, top = 6.dp, bottom = 6.dp),
+            .padding(end = 20.dp, top = 6.dp, bottom = 6.dp)
+            .clickable { onItemClick() },
         shape = RoundedCornerShape(4.dp),
         backgroundColor = White,
         elevation = 4.dp

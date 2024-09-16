@@ -23,26 +23,33 @@ kotlin {
 
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.media3.ui)
+            implementation(libs.androidx.media3.exoplayer)
+        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
-            api(projects.splash)
-            api(projects.onboard)
-            api(projects.auth)
-            api(projects.main)
-            api(projects.detail)
-
-            implementation(libs.bundles.koin)
             implementation(libs.bundles.voyager)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.composeIcons)
+            implementation(libs.kamel)
+            implementation(libs.result)
+            implementation(libs.kermit.log)
+
+            api(projects.common)
+            api(projects.core)
         }
     }
 }
 
 android {
-    namespace = "com.kylix.navigation"
+    namespace = "com.kylix.detail"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -54,8 +61,4 @@ android {
     buildFeatures {
         compose = true
     }
-}
-dependencies {
-    implementation(project(":onboard"))
-    implementation(project(":auth"))
 }

@@ -8,4 +8,5 @@ sealed class SharedScreen: ScreenProvider {
     data object Login : SharedScreen()
     data object Register: SharedScreen()
     data object Main: SharedScreen()
+    data class Detail(val recipeId: String): SharedScreen()
 }

@@ -20,11 +20,14 @@ import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.components.RecipeItemHorizontal
 import beukmm.di.koinScreenModel
+import beukmm.navigator.SharedScreen
 import beukmm.theme.Primary700
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
+import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.kylix.home.components.CategoryItem
 import com.kylix.home.components.HomeAppbar
 
@@ -33,12 +36,11 @@ class HomeScreen : Screen {
     @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
-
-        val navigator = LocalNavigator.current
-
         val screenModel = koinScreenModel<HomeScreenModel>()
         val uiState by screenModel.uiState.collectAsState()
         val homeState by screenModel.homeState.collectAsState()
+
+        val navigator = LocalNavigator.currentOrThrow
 
         LifecycleEffectOnce {
             screenModel.getHomeDate()
@@ -114,7 +116,14 @@ class HomeScreen : Screen {
                                 foodName = recipe.name,
                                 favoritesCount = recipe.favorites,
                                 rating = recipe.rating,
-                                cookTime = recipe.estimationTime
+                                cookTime = recipe.estimationTime,
+                                onItemClick = {
+                                    navigator.push(
+                                       ScreenRegistry.get(
+                                           SharedScreen.Detail(recipe.recipeId)
+                                       )
+                                    )
+                                }
                             )
                         }
                     }

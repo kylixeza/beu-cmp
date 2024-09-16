@@ -48,6 +48,7 @@ kotlin {
 
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.koin)
+            implementation(libs.kamel)
 
             implementation(projects.navigation)
         }
