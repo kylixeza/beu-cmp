@@ -6,6 +6,7 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import co.touchlab.kermit.Logger
 import com.kylix.core.model.RecipeDetail
 import com.kylix.core.repositories.favorite.FavoriteRepository
+import com.kylix.core.repositories.history.HistoryRepository
 import com.kylix.core.repositories.recipe.RecipeRepository
 import com.kylix.core.util.foldResult
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class DetailScreenModel(
     private val recipeRepository: RecipeRepository,
-    private val favoriteRepository: FavoriteRepository
+    private val favoriteRepository: FavoriteRepository,
+    private val historyRepository: HistoryRepository
 ) : BaseScreenModel() {
 
     var detailState = MutableStateFlow(DetailState())
@@ -86,11 +88,28 @@ class DetailScreenModel(
             it.copy(showReviewSnacker = false)
         }
     }
+
+    fun postHistory(recipeId: String) {
+        onSuspendProcess {
+            val timeSpent = timer.elapsedTime()
+            historyRepository.postHistory(recipeId, timeSpent).foldResult(
+                onSuccess = { result ->
+                    detailState.update {
+                        it.copy(historyId = result)
+                    }
+                },
+                onError = {
+                    onDataError(it)
+                }
+            )
+        }
+    }
 }
 
 data class DetailState(
     val recipe: RecipeDetail? = null,
     val isFavorite: Boolean = false,
     val showReviewSnacker: Boolean = false,
-    val cookingSessionTime: String = ""
+    val cookingSessionTime: String = "",
+    val historyId: String? = null
 )

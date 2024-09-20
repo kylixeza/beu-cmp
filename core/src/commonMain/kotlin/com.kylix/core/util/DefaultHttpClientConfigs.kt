@@ -45,6 +45,7 @@ fun<T: HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultContentNegotiation(
         json(
             json = Json {
                 ignoreUnknownKeys = true
+                encodeDefaults = true
             }
         )
         block()

@@ -2,6 +2,8 @@ package beukmm.base
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +30,7 @@ open class BaseScreenModel: ScreenModel {
     fun onSuspendProcess(
         block: suspend () -> Unit
     ) {
-        screenModelScope.launch {
+        screenModelScope.launch(context = Dispatchers.IO) {
             onStartLoading()
             block()
             onFinishLoading()

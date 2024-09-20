@@ -4,5 +4,5 @@ import com.kylix.detail.DetailScreenModel
 import org.koin.dsl.module
 
 val detailModule = module {
-    factory { DetailScreenModel(get(), get()) }
+    factory { DetailScreenModel(get(), get(), get()) }
 }

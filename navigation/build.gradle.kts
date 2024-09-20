@@ -34,6 +34,7 @@ kotlin {
             api(projects.auth)
             api(projects.main)
             api(projects.detail)
+            api(projects.review)
 
             implementation(libs.bundles.koin)
             implementation(libs.bundles.voyager)

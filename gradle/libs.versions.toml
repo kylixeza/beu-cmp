@@ -31,6 +31,7 @@ result = "2.0.0"
 composeIcons = "1.1.0"
 kamel = "0.9.5"
 datetime = "0.6.1"
+imagepickncrop = "1.0.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -113,6 +114,9 @@ androidx-media3-ui = { group = "androidx.media3", name = "media3-ui", version.re
 
 # DateTime
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
+
+# Image Pick & Crop
+chaintech-imagepickncrop = { group = "network.chaintech", name = "cmp-image-pick-n-crop", version.ref="imagepickncrop" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

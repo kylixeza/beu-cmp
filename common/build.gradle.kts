@@ -38,6 +38,7 @@ kotlin {
 
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.ktor)
             implementation(libs.bundles.composeIcons)
 
             implementation(libs.kermit.log)

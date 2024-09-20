@@ -23,11 +23,14 @@ import beukmm.common.generated.resources.ic_favorite
 import beukmm.common.generated.resources.ic_unfavorite_white
 import beukmm.components.BaseAppBar
 import beukmm.di.koinScreenModel
+import beukmm.navigator.SharedScreen
 import beukmm.theme.Error500
 import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
+import cafe.adriel.voyager.core.registry.ScreenRegistry
+import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -62,25 +65,6 @@ class DetailScreen(
                     rightIconTint = if (detailState.isFavorite) Error500 else White,
                     onRightIconClick = { screenModel.toggleFavorite(recipeId) }
                 )
-                AnimatedVisibility(
-                    visible = detailState.showReviewSnacker,
-                    enter = slideInVertically(
-                        initialOffsetY = { -it }
-                    ),
-                    exit = slideOutVertically(
-                        targetOffsetY = { -it }
-                    )
-                ) {
-                    ReviewSnacker(
-                        cookingSessionDuration = detailState.cookingSessionTime,
-                        onCloseReview = {
-                            screenModel.onCloseReviewSnacker()
-                        },
-                        onReviewNow = {
-
-                        }
-                    )
-                }
             },
             uiState = uiState,
             onLoadingDialogDismissRequest = {
@@ -104,6 +88,7 @@ class DetailScreen(
                             url = detailState.recipe?.video.orEmpty(),
                             onVideoFinished = {
                                 screenModel.onVideoFinished()
+                                screenModel.postHistory(recipeId)
                             }
                         )
                     }
@@ -119,6 +104,27 @@ class DetailScreen(
                     DetailTabNavigation(detailState)
                 }
             }
+        }
+
+        AnimatedVisibility(
+            visible = detailState.showReviewSnacker,
+            enter = slideInVertically(
+                initialOffsetY = { -it }
+            ),
+            exit = slideOutVertically(
+                targetOffsetY = { -it }
+            )
+        ) {
+            ReviewSnacker(
+                cookingSessionDuration = detailState.cookingSessionTime,
+                onCloseReview = {
+                    screenModel.onCloseReviewSnacker()
+                },
+                onReviewNow = {
+                    if (detailState.historyId != null)
+                        navigator.replace(ScreenRegistry.get(SharedScreen.Review(detailState.historyId.orEmpty())),)
+                }
+            )
         }
     }
 }

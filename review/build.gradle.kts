@@ -34,8 +34,10 @@ kotlin {
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.composeIcons)
+            implementation(libs.kamel)
             implementation(libs.result)
             implementation(libs.kermit.log)
+            implementation(libs.chaintech.imagepickncrop)
 
             api(projects.common)
             api(projects.core)
@@ -44,7 +46,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.kylix.home"
+    namespace = "com.kylix.review"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -52,5 +54,8 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+    buildFeatures {
+        compose = true
     }
 }

@@ -9,4 +9,5 @@ sealed class SharedScreen: ScreenProvider {
     data object Register: SharedScreen()
     data object Main: SharedScreen()
     data class Detail(val recipeId: String): SharedScreen()
+    data class Review(val historyId: String): SharedScreen()
 }

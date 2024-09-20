@@ -5,6 +5,7 @@ import com.kylix.navigation.authNavigationScreenModule
 import com.kylix.navigation.detailNavigationScreenModule
 import com.kylix.navigation.mainNavigationScreenModule
 import com.kylix.navigation.onBoardNavigationScreenModule
+import com.kylix.navigation.reviewNavigationScreenModule
 import com.kylix.navigation.splashNavigationScreenModule
 
 fun installNavigationRegistry() {
@@ -14,5 +15,6 @@ fun installNavigationRegistry() {
         authNavigationScreenModule()
         mainNavigationScreenModule()
         detailNavigationScreenModule()
+        reviewNavigationScreenModule()
     }
 }

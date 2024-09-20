@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,8 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -24,19 +21,17 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import beukmm.common.generated.resources.Res
 import beukmm.common.generated.resources.ic_star
 import beukmm.common.generated.resources.ic_unstar
 import beukmm.common.generated.resources.ilu_default_profile_picture
+import beukmm.components.NetworkFlexboxImages
 import beukmm.theme.Primary700
 import beukmm.util.customKamelConfig
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -144,7 +139,7 @@ class ReviewTab(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            ReviewImages(
+            NetworkFlexboxImages(
                 images = reviewImages
             )
         }
@@ -177,43 +172,6 @@ class ReviewTab(
                     contentDescription = null,
                     modifier = Modifier.size(14.dp)
                 )
-            }
-        }
-    }
-
-    @Composable
-    private fun ReviewImages(
-        images: List<String>
-    ) {
-        val density = LocalDensity.current
-
-        var rowWidthDp by remember { mutableStateOf(0.dp) }
-        val itemSpacing by remember { mutableStateOf(8.dp) }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .onGloballyPositioned { coordinates ->
-                    rowWidthDp = with(density) { coordinates.size.width.toDp() }
-                },
-            horizontalArrangement = Arrangement.spacedBy(itemSpacing)
-        ) {
-            val itemSize = (rowWidthDp - (itemSpacing * 2)) / 3
-            images.forEach {
-                Card(
-                    modifier = Modifier
-                        .size(itemSize)
-                        .aspectRatio(1f),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    CompositionLocalProvider(LocalKamelConfig provides customKamelConfig) {
-                        KamelImage(
-                            asyncPainterResource(it),
-                            contentDescription = "Review image",
-                            contentScale = ContentScale.Crop
-                        )
-                    }
-                }
             }
         }
     }
