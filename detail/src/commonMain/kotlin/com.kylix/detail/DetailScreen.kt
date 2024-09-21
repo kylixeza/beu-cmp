@@ -70,7 +70,6 @@ class DetailScreen(
             onLoadingDialogDismissRequest = {
                 screenModel.onFinishLoading()
             },
-            statusBarColor = Primary700
         ) {
 
             Column(

@@ -47,13 +47,11 @@ class CategoryScreen(
             topBar = {
                 BaseAppBar(
                     title = categoryName,
-                    leftIconTint = White,
                     onLeftIconClick = { navigator.pop() },
                     rightIcon = null
                 )
             },
             uiState = uiState,
-            statusBarColor = Primary700
         ) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),

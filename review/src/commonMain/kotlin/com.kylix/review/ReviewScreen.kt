@@ -18,13 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.common.generated.resources.Res
@@ -33,7 +28,6 @@ import beukmm.components.BaseAppBar
 import beukmm.components.BeuBasicTextField
 import beukmm.components.LocalFlexboxImages
 import beukmm.theme.Primary500
-import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
@@ -66,7 +60,6 @@ class ReviewScreen(
                     onLeftIconClick = { navigator.pop() },
                 )
             },
-            statusBarColor = Primary700,
             uiState = uiState,
             onLoadingDialogDismissRequest = {
                 screenModel.onFinishLoading()
