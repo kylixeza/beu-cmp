@@ -30,6 +30,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.kylix.home.components.CategoryItem
 import com.kylix.home.components.HomeAppbar
+import com.kylix.home.screens.search.SearchScreen
 
 class HomeScreen : Screen {
 
@@ -51,7 +52,7 @@ class HomeScreen : Screen {
             topBar = {
                 HomeAppbar(
                     greeting = homeState.greet,
-                    onSearchClick = {  }
+                    onSearchClick = { navigator.push(SearchScreen()) }
                 )
             },
             uiState = uiState,

@@ -6,10 +6,12 @@ import com.kylix.core.data.remote.responses.BaseResponse
 import com.kylix.core.data.remote.responses.recipe.CategoryResponse
 import com.kylix.core.data.remote.responses.recipe.HomeRecipeResponse
 import com.kylix.core.data.remote.responses.recipe.RecipeDetailResponse
+import com.kylix.core.data.remote.responses.recipe.RecipeListResponse
 import com.kylix.core.data.remote.services.RecipeService
 import com.kylix.core.model.Category
 import com.kylix.core.model.HomeRecipe
 import com.kylix.core.model.RecipeDetail
+import com.kylix.core.model.RecipeList
 import com.kylix.core.util.Error
 import com.kylix.core.util.Success
 import io.ktor.client.statement.HttpResponse
@@ -63,6 +65,23 @@ class RecipeRepositoryImpl(
 
             override suspend fun RecipeDetailResponse.mapResponse(): RecipeDetail {
                 return toRecipeDetail()
+            }
+
+        }.run()
+    }
+
+    override suspend fun searchRecipes(query: String): Result<Success<List<RecipeList>>, Error> {
+        return object : BaseNetworkRequest<List<RecipeList>, List<RecipeListResponse>>() {
+            override suspend fun createCall(): HttpResponse {
+                return recipeService.searchRecipes(query)
+            }
+
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<List<RecipeListResponse>>> {
+                return BaseResponse.serializer(ListSerializer(RecipeListResponse.serializer()))
+            }
+
+            override suspend fun List<RecipeListResponse>.mapResponse(): List<RecipeList> {
+                return map { it.toRecipeList() }
             }
 
         }.run()
