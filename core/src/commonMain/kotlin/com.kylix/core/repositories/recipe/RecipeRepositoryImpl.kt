@@ -87,4 +87,21 @@ class RecipeRepositoryImpl(
         }.run()
     }
 
+    override suspend fun getRecipesByCategory(categoryId: String): Result<Success<List<RecipeList>>, Error> {
+        return object : BaseNetworkRequest<List<RecipeList>, List<RecipeListResponse>>() {
+            override suspend fun createCall(): HttpResponse {
+                return recipeService.getRecipesByCategory(categoryId)
+            }
+
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<List<RecipeListResponse>>> {
+                return BaseResponse.serializer(ListSerializer(RecipeListResponse.serializer()))
+            }
+
+            override suspend fun List<RecipeListResponse>.mapResponse(): List<RecipeList> {
+                return map { it.toRecipeList() }
+            }
+
+        }.run()
+    }
+
 }

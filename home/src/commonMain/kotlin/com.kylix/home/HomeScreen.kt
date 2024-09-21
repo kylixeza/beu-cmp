@@ -30,6 +30,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.kylix.home.components.CategoryItem
 import com.kylix.home.components.HomeAppbar
+import com.kylix.home.screens.category.CategoryScreen
 import com.kylix.home.screens.search.SearchScreen
 
 class HomeScreen : Screen {
@@ -79,7 +80,17 @@ class HomeScreen : Screen {
                         contentPadding = PaddingValues(horizontal = 12.dp)
                     ) {
                         items(homeState.categories) {
-                            CategoryItem(category = it)
+                            CategoryItem(
+                                category = it,
+                                onCategorySelected = { id, name ->
+                                    navigator.push(
+                                        CategoryScreen(
+                                            categoryId = id,
+                                            categoryName = name
+                                        )
+                                    )
+                                }
+                            )
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))

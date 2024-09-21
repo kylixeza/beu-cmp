@@ -15,12 +15,12 @@ import com.kylix.core.model.Category
 fun CategoryItem(
     modifier: Modifier = Modifier,
     category: Category,
-    onCategoryClick: (String) -> Unit = { }
+    onCategorySelected: (String, String) -> Unit = {_, _ -> }
 ) {
     Card(
         modifier = modifier
             .padding(end = 8.dp)
-            .clickable { onCategoryClick(category.categoryId) },
+            .clickable { onCategorySelected(category.categoryId, category.name) },
         backgroundColor = Neutral200
     ) {
         Text(
