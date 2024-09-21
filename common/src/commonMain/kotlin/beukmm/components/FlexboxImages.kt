@@ -47,6 +47,9 @@ fun NetworkFlexboxImages(
     var rowWidthDp by remember { mutableStateOf(0.dp) }
     val itemSpacing by remember { mutableStateOf(8.dp) }
 
+    var selectedImage by remember { mutableStateOf("") }
+    var showImagePreview by remember { mutableStateOf(false) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,7 +63,11 @@ fun NetworkFlexboxImages(
             Card(
                 modifier = Modifier
                     .size(itemSize)
-                    .aspectRatio(1f),
+                    .aspectRatio(1f)
+                    .clickable {
+                        selectedImage = it
+                        showImagePreview = true
+                    },
                 shape = RoundedCornerShape(8.dp)
             ) {
                 CompositionLocalProvider(LocalKamelConfig provides customKamelConfig) {
@@ -73,18 +80,28 @@ fun NetworkFlexboxImages(
             }
         }
     }
+
+    if (showImagePreview) {
+        ImagePreviewDialogue(
+            image = selectedImage,
+            onDismissRequest = { showImagePreview = false }
+        )
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LocalFlexboxImages(
     images: List<ImageBitmap>,
-    onDeleteImage: (ImageBitmap) -> Unit
+    onDeleteImage: (ImageBitmap) -> Unit = {},
 ) {
     val density = LocalDensity.current
 
     var rowWidthDp by remember { mutableStateOf(0.dp) }
     val itemSpacing by remember { mutableStateOf(8.dp) }
+
+    var selectedImage by remember { mutableStateOf<ImageBitmap?>(null) }
+    var showImagePreview by remember { mutableStateOf(false) }
 
     LazyRow(
         modifier = Modifier
@@ -104,7 +121,11 @@ fun LocalFlexboxImages(
                 modifier = Modifier
                     .size(itemSize)
                     .aspectRatio(1f)
-                    .animateItemPlacement(),
+                    .animateItemPlacement()
+                    .clickable {
+                        selectedImage = it
+                        showImagePreview = true
+                    },
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Box (
@@ -130,5 +151,12 @@ fun LocalFlexboxImages(
                 }
             }
         }
+    }
+
+    if (showImagePreview) {
+        ImagePreviewDialogue(
+            image = selectedImage!!,
+            onDismissRequest = { showImagePreview = false }
+        )
     }
 }
