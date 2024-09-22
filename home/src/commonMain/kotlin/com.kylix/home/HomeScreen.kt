@@ -21,7 +21,7 @@ import beukmm.base.BaseScreenContent
 import beukmm.components.RecipeItemHorizontal
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
-import beukmm.theme.Primary700
+import beukmm.theme.Primary500
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.registry.ScreenRegistry
@@ -58,7 +58,7 @@ class HomeScreen : Screen {
             },
             uiState = uiState,
             onLoadingDialogDismissRequest = { screenModel.onFinishLoading() },
-            statusBarColor = Primary700
+            statusBarColor = Primary500
         ) { innerPadding ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
