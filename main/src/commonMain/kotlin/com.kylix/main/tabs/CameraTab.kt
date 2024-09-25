@@ -1,26 +1,41 @@
 package com.kylix.main.tabs
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import beukmm.base.ScaleTransition
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import cafe.adriel.voyager.transitions.ScreenTransition
+import com.kylix.camera.CameraScreen
 import compose.icons.feathericons.Camera
+import kotlin.jvm.Transient
 
-object CameraTab: Tab {
+class CameraTab(
+    @Transient
+    val onNavigator: (isRoot: Boolean) -> Unit
+): Tab {
 
+    @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text("Camera Screen")
+        Navigator(
+            CameraScreen(),
+            disposeBehavior = NavigatorDisposeBehavior(disposeSteps = false)
+        ) { navigator ->
+            LaunchedEffect(navigator.lastItem) {
+                onNavigator(navigator.lastItem is CameraScreen)
+            }
+
+            ScreenTransition(
+                navigator = navigator,
+                defaultTransition = ScaleTransition(),
+                disposeScreenAfterTransitionEnd = true
+            )
         }
     }
 

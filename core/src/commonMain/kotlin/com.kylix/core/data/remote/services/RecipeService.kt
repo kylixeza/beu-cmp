@@ -16,4 +16,6 @@ class RecipeService(
     suspend fun searchRecipes(query: String) = client.get("recipes?query=$query")
 
     suspend fun getRecipesByCategory(categoryId: String) = client.get("recipes/categories/$categoryId")
+
+    suspend fun getRelatedPredictionRecipes(query: String) = client.get("prediction?query=$query")
 }

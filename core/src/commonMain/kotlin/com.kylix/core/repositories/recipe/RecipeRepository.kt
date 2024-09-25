@@ -15,4 +15,5 @@ interface RecipeRepository {
     suspend fun getRecipeDetail(recipeId: String): Result<Success<RecipeDetail>, Error>
     suspend fun searchRecipes(query: String): Result<Success<List<RecipeList>>, Error>
     suspend fun getRecipesByCategory(categoryId: String): Result<Success<List<RecipeList>>, Error>
+    suspend fun getRelatedPredictionRecipes(query: String): Result<Success<List<RecipeList>>, Error>
 }
