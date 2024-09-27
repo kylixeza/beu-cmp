@@ -66,7 +66,7 @@ class HomeScreen : Screen {
             ) {
 
                 item {
-                    Text(
+                      Text(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                         text = "Categories",
                         style = MaterialTheme.typography.body1.copy(

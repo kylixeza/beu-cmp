@@ -41,7 +41,11 @@ class MainScreen : Screen {
                 isVisible = it
             }
         ) }
-        val profileTab = remember { ProfileTab }
+        val profileTab = remember { ProfileTab(
+            onNavigator = {
+                isVisible = it
+            }
+        ) }
 
         TabNavigator(
             homeTab,

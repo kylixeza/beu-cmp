@@ -8,4 +8,6 @@ class ProfileService(
 ) {
 
     suspend fun greet() = httpClient.get("profile/greet")
+
+    suspend fun getProfile() = httpClient.get("profile")
 }

@@ -11,6 +11,7 @@ import com.kylix.core.di.repositoriesModule
 import com.kylix.detail.di.detailModule
 import com.kylix.home.di.homeModule
 import com.kylix.onboard.di.onBoardModule
+import com.kylix.profile.di.profileModule
 import com.kylix.review.di.reviewModule
 import com.kylix.splash.di.splashModule
 import org.koin.core.context.startKoin
@@ -34,7 +35,8 @@ fun installKoin(
             detailModule,
             reviewModule,
             cameraModule,
-            tfLitePlatformModule
+            tfLitePlatformModule,
+            profileModule
         )
     }
 }

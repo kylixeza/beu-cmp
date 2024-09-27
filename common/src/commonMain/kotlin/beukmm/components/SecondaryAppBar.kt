@@ -33,7 +33,7 @@ fun SecondaryAppBar(
     modifier: Modifier = Modifier,
     title: String = "",
     titleColor: Color = Black,
-    leftIcon: DrawableResource = Res.drawable.ic_arrow_back_black,
+    leftIcon: DrawableResource? = Res.drawable.ic_arrow_back_black,
     leftIconTint: Color = Black,
     background: Color = White,
     onLeftIconClick: () -> Unit = {  },
@@ -50,17 +50,19 @@ fun SecondaryAppBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
-            IconButton(
-                modifier = Modifier.size(24.dp),
-                onClick = { onLeftIconClick.invoke() },
-            ) {
-                Icon(
-                    painterResource(leftIcon),
-                    null,
-                    tint = leftIconTint
-                )
+            if (leftIcon != null) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { onLeftIconClick.invoke() },
+                ) {
+                    Icon(
+                        painterResource(leftIcon),
+                        null,
+                        tint = leftIconTint
+                    )
+                }
+                Spacer(modifier = Modifier.width(16.dp))
             }
-            Spacer(modifier = Modifier.width(16.dp))
             Text(
                 text = title,
                 modifier = Modifier.weight(1f),
