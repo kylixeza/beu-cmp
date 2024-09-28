@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,6 +18,7 @@ import beukmm.components.RecipeItemVertical
 import beukmm.components.SecondaryAppBar
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
+import beukmm.theme.Primary500
 import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.core.registry.ScreenRegistry
@@ -43,7 +43,7 @@ class SearchScreen: Screen {
                     title = "Search",
                     titleColor = White,
                     leftIconTint = White,
-                    background = Primary700,
+                    background = Primary500,
                     onLeftIconClick = {
                         navigator?.pop()
                     },
