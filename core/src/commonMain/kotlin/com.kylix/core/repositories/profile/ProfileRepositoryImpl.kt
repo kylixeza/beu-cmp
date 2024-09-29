@@ -2,6 +2,7 @@ package com.kylix.core.repositories.profile
 
 import com.github.michaelbull.result.Result
 import com.kylix.core.base.BaseNetworkRequest
+import com.kylix.core.data.remote.requests.UserRequest
 import com.kylix.core.data.remote.responses.BaseResponse
 import com.kylix.core.data.remote.responses.profile.UserResponse
 import com.kylix.core.data.remote.services.ProfileService
@@ -11,6 +12,8 @@ import com.kylix.core.util.Success
 import io.ktor.client.statement.HttpResponse
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class ProfileRepositoryImpl(
     private val profileService: ProfileService
@@ -45,6 +48,33 @@ class ProfileRepositoryImpl(
 
             override suspend fun UserResponse.mapResponse(): User {
                 return this.toUser()
+            }
+
+        }.run()
+    }
+
+    override suspend fun updateProfile(
+        user: User,
+        newAvatar: ByteArray?
+    ): Result<Success<Unit>, Error> {
+        return object : BaseNetworkRequest<Unit, String>() {
+            override suspend fun createCall(): HttpResponse {
+                val body = UserRequest(
+                    username = user.username,
+                    name = user.name,
+                    email = user.email,
+                    phoneNumber = user.phoneNumber
+                )
+                val jsonBody = Json.encodeToString(body)
+                return profileService.updateProfile(jsonBody, newAvatar)
+            }
+
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<String>> {
+                return BaseResponse.serializer(String.serializer())
+            }
+
+            override suspend fun String.mapResponse() {
+                return
             }
 
         }.run()

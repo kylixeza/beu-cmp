@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
@@ -21,6 +22,7 @@ import beukmm.theme.Primary500
 import beukmm.theme.White
 import com.kylix.core.model.RecipeList
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PredictionResultBottomSheet(
     modifier: Modifier = Modifier,

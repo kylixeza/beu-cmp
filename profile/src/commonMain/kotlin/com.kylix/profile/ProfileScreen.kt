@@ -36,6 +36,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.kylix.profile.components.ItemSetting
+import com.kylix.profile.screens.UpdateProfileScreen
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.kamel.image.config.LocalKamelConfig
@@ -101,6 +102,9 @@ class ProfileScreen: Screen {
                     section.settings.forEach { setting ->
                         ItemSetting(
                             setting = setting,
+                            onClick = {
+                                navigator.push(UpdateProfileScreen())
+                            }
                         )
                     }
                 }

@@ -1,6 +1,7 @@
 package com.kylix.profile.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,11 +22,15 @@ import org.jetbrains.compose.resources.painterResource
 fun ItemSetting(
     modifier: Modifier = Modifier,
     setting: Setting,
+    onClick: () -> Unit
 ) {
 
     Row(
         modifier = modifier.fillMaxWidth()
-            .padding(vertical = 6.dp),
+            .padding(vertical = 6.dp)
+            .clickable {
+                onClick()
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
