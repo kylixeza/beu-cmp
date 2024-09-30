@@ -1,21 +1,20 @@
 package com.kylix.camera
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -44,13 +43,14 @@ import org.koin.compose.koinInject
 
 class CameraScreen: Screen {
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val cameraController = remember { CameraController() }
         val tfLiteHelper = koinInject<TFLiteHelper>()
 
         val coroutineScope = rememberCoroutineScope()
-        val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+        val bottomSheetState = rememberModalBottomSheetState()
 
         val screenModel = koinScreenModel<CameraScreenModel>()
         val cameraState by screenModel.cameraState.collectAsState()
@@ -82,48 +82,49 @@ class CameraScreen: Screen {
             cameraController.bindCamera()
         }
 
-        PredictionResultBottomSheet(
-            result = cameraState.predictionResult,
-            recipes = cameraState.recipes,
-            sheetState = bottomSheetState,
-            onItemSelected = { recipeId ->
-                navigator.push(ScreenRegistry.get(SharedScreen.Detail(recipeId)))
-            }
-        ) {
-            BaseScreenContent(
-                modifier = Modifier.fillMaxSize(),
-                uiState = uiState,
-            ) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    CameraKPreview(
-                        modifier = Modifier.fillMaxSize(),
-                        cameraController = cameraController,
-                    )
-
-                    IconButton(
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(bottom = 92.dp),
-                        onClick = {
-                            coroutineScope.launch {
-                                when (val result = cameraController.takePicture(ImageFormat.JPEG)) {
-                                    is ImageCaptureResult.Error -> {  }
-                                    is ImageCaptureResult.Success -> {
-                                        screenModel.setImageResult(result.image)
-                                    }
+        BaseScreenContent(
+            modifier = Modifier.fillMaxSize(),
+            uiState = uiState
+        ) { innerPadding ->
+            Box(modifier = Modifier.fillMaxSize()) {
+                CameraKPreview(
+                    modifier = Modifier.fillMaxSize(),
+                    cameraController = cameraController,
+                )
+                IconButton(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(80.dp)
+                        .size(128.dp),
+                    onClick = {
+                        coroutineScope.launch {
+                            when (val result = cameraController.takePicture(ImageFormat.JPEG)) {
+                                is ImageCaptureResult.Error -> {  }
+                                is ImageCaptureResult.Success -> {
+                                    screenModel.setImageResult(result.image)
                                 }
                             }
                         }
-                    ) {
-                        Icon(
-                            modifier = Modifier,
-                            painter = painterResource(Res.drawable.ic_camera_capture),
-                            contentDescription = null,
-                            tint = Primary500
-                        )
                     }
+                ) {
+                    Image(
+                        painter = painterResource(Res.drawable.ic_camera_capture),
+                        contentDescription = null,
+                    )
                 }
             }
+        }
+
+        if (cameraState.showBottomSheet) {
+            PredictionResultBottomSheet(
+                result = cameraState.predictionResult,
+                recipes = cameraState.recipes,
+                sheetState = bottomSheetState,
+                onItemSelected = { recipeId ->
+                    navigator.push(ScreenRegistry.get(SharedScreen.Detail(recipeId)))
+                },
+                onDismissRequest = { screenModel.hideBottomSheet() }
+            )
         }
 
         LaunchedEffect(cameraState.imageResult) {
@@ -133,8 +134,8 @@ class CameraScreen: Screen {
                     screenModel.setPredictionResult(predictionResult)
                     delay(1000)
 
+                    screenModel.showBottomSheet()
                     screenModel.getRelatedRecipes()
-                    bottomSheetState.show()
                 }
             }
         }

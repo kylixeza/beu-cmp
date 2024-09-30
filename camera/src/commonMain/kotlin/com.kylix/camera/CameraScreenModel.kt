@@ -47,6 +47,14 @@ class CameraScreenModel(
         }
     }
 
+    fun showBottomSheet() {
+        cameraState.update { it.copy(showBottomSheet = true) }
+    }
+
+    fun hideBottomSheet() {
+        cameraState.update { it.copy(showBottomSheet = false) }
+    }
+
     fun getRelatedRecipes() {
         onSuspendProcess {
             val query = cameraState.value.predictionResult
@@ -71,4 +79,5 @@ data class CameraState(
     val imageResult: ByteArray = byteArrayOf(),
     val predictionResult: String = "",
     val recipes: List<RecipeList> = emptyList(),
+    val showBottomSheet: Boolean = false
 )

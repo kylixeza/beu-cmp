@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -19,7 +20,6 @@ import beukmm.components.SecondaryAppBar
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
 import beukmm.theme.Primary500
-import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
@@ -61,11 +61,10 @@ class SearchScreen: Screen {
                     )
                 }
             },
-            statusBarColor = Primary700,
-        ) {
-
+            statusBarColor = Primary500,
+        ) { innerPadding ->
             LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(innerPadding),
                 contentPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp)
             ) {
                 items(

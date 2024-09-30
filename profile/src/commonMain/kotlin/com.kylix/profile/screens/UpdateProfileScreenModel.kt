@@ -8,7 +8,6 @@ import com.kylix.core.repositories.profile.ProfileRepository
 import com.kylix.core.util.foldResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.updateAndGet
 
 class UpdateProfileScreenModel(
     private val repository: ProfileRepository

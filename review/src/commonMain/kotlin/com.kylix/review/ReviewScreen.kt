@@ -9,11 +9,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -64,16 +65,16 @@ class ReviewScreen(
             onLoadingDialogDismissRequest = {
                 screenModel.onFinishLoading()
             }
-        ) {
+        ) { innerPadding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().padding(innerPadding),
                 contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
             ) {
                 item {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = "How was your experience?",
-                        style = MaterialTheme.typography.h5,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     RatingBarReview(
@@ -90,7 +91,7 @@ class ReviewScreen(
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Write down your review",
-                        style = MaterialTheme.typography.h5,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     BeuBasicTextField(
@@ -107,7 +108,7 @@ class ReviewScreen(
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Take a picture of your cooking!",
-                        style = MaterialTheme.typography.h5,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -150,7 +151,7 @@ class ReviewScreen(
                     ) {
                         Text(
                             text = "Submit Review",
-                            style = MaterialTheme.typography.body2.copy(color = White)
+                            style = MaterialTheme.typography.bodyMedium.copy(color = White)
                         )
                     }
                 }

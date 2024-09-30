@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -27,8 +27,6 @@ import beukmm.base.BaseScreenContent
 import beukmm.components.SecondaryAppBar
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
-import beukmm.theme.Neutral500
-import beukmm.theme.Primary500
 import beukmm.theme.White
 import beukmm.util.customKamelConfig
 import cafe.adriel.voyager.core.registry.rememberScreen
@@ -87,7 +85,7 @@ class ProfileScreen: Screen {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = profileState.username,
-                            style = MaterialTheme.typography.body1.copy()
+                            style = MaterialTheme.typography.bodyLarge.copy()
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                     }
@@ -96,7 +94,7 @@ class ProfileScreen: Screen {
                 items(profileState.sections) { section ->
                     Text(
                         text = section.sectionName,
-                        style = MaterialTheme.typography.h6,
+                        style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.padding(vertical = 16.dp)
                     )
                     section.settings.forEach { setting ->
@@ -117,7 +115,7 @@ class ProfileScreen: Screen {
                     ) {
                         Text(
                             text = "Logout",
-                            style = MaterialTheme.typography.body2.copy(
+                            style = MaterialTheme.typography.bodyMedium.copy(
                                 color = White
                             )
                         )

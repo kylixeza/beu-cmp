@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -33,8 +33,8 @@ fun PagerIndicator(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
     count: Int,
-    selectedColor: Color = MaterialTheme.colors.secondary,
-    unselectedColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+    selectedColor: Color = MaterialTheme.colorScheme.secondary,
+    unselectedColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
     selectedLength : Dp = 24.dp,
     size: Dp = 12.dp,
     dotSpace: Dp = 12.dp

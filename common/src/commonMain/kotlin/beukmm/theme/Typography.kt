@@ -1,12 +1,11 @@
 package beukmm.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.GenericFontFamily
 import androidx.compose.ui.unit.sp
 import beukmm.common.generated.resources.Poppins_Bold
 import beukmm.common.generated.resources.Poppins_Light
@@ -26,46 +25,59 @@ fun PoppinsFamily() = FontFamily(
 
 @Composable
 fun BeuTypography() = Typography(
-    defaultFontFamily = PoppinsFamily(),
-    h1 = TextStyle(
+    headlineLarge = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
-    h2 = TextStyle(
+    headlineMedium = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
-    h3 = TextStyle(
+    headlineSmall = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
-    h4 = TextStyle(
+    titleLarge = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
-    h5 = TextStyle(
+    titleMedium = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
-    h6 = TextStyle(
+    titleSmall = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 14.sp,
-        color =Neutral900,
+        color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
 
-    body1 = TextStyle(
+    bodyLarge = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
-    body2 = TextStyle(
+    bodyMedium = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         color = Neutral900,
+        fontFamily = PoppinsFamily(),
+    ),
+    bodySmall = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        color = Neutral900,
+        fontFamily = PoppinsFamily(),
     ),
 )

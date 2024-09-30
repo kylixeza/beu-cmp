@@ -13,10 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -77,8 +78,8 @@ fun RecipeItemVertical(
             .padding(vertical = 8.dp)
             .clickable { onItemClick() },
         shape = RoundedCornerShape(4.dp),
-        backgroundColor = White,
-        elevation = 4.dp
+        colors = CardDefaults.cardColors(containerColor = White),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min)
@@ -103,7 +104,7 @@ fun RecipeItemVertical(
 
                 Text(
                     text = foodName,
-                    style = MaterialTheme.typography.body2.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 12.sp
                     ),
@@ -113,11 +114,11 @@ fun RecipeItemVertical(
                 Spacer(modifier = Modifier.height(8.dp))
                 Card(
                     shape = RoundedCornerShape(4.dp),
-                    backgroundColor = cardDifficultyColor,
+                    colors = CardDefaults.cardColors(containerColor = cardDifficultyColor),
                 ) {
                     Text(
                         text = difficulty,
-                        style = MaterialTheme.typography.body2.copy(
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             fontSize = 8.sp,
                             color = difficultyColor
                         ),
@@ -141,7 +142,7 @@ fun RecipeItemVertical(
                     )
                     Text(
                         text = "$favoritesCount other users",
-                        style = MaterialTheme.typography.body2.copy(
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             fontSize = 8.sp
                         ),
                         modifier = Modifier.padding(start = 4.dp)
@@ -165,7 +166,7 @@ fun RecipeItemVertical(
                         Text(
                             modifier = Modifier.padding(start = 2.dp),
                             text = rating.toString(),
-                            style = MaterialTheme.typography.body2.copy(
+                            style = MaterialTheme.typography.bodyMedium.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = 10.sp
                             ),
@@ -184,7 +185,7 @@ fun RecipeItemVertical(
                         )
                         Text(
                             text = "$cookTime min",
-                            style = MaterialTheme.typography.body2.copy(
+                            style = MaterialTheme.typography.bodyMedium.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = 10.sp
                             ),

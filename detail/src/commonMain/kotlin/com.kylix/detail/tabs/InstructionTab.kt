@@ -13,14 +13,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -49,7 +48,7 @@ class InstructionTab(
                 Text(
                     modifier = Modifier.padding(vertical = 8.dp),
                     text = "Ingredients",
-                    style = MaterialTheme.typography.h3.copy(
+                    style = MaterialTheme.typography.headlineSmall.copy(
                         fontSize = 14.sp
                     )
                 )
@@ -73,7 +72,7 @@ class InstructionTab(
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = item,
-                                style = MaterialTheme.typography.body2.copy(
+                                style = MaterialTheme.typography.bodyMedium.copy(
                                     fontSize = 12.sp
                                 ),
                                 modifier = Modifier.weight(1f)
@@ -88,7 +87,7 @@ class InstructionTab(
                 Text(
                     modifier = Modifier.padding(vertical = 8.dp),
                     text = "Tools",
-                    style = MaterialTheme.typography.h3.copy(
+                    style = MaterialTheme.typography.headlineSmall.copy(
                         fontSize = 14.sp
                     )
                 )
@@ -112,7 +111,7 @@ class InstructionTab(
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = item,
-                                style = MaterialTheme.typography.body2.copy(
+                                style = MaterialTheme.typography.bodyMedium.copy(
                                     fontSize = 12.sp
                                 ),
                                 modifier = Modifier.weight(1f)
@@ -127,7 +126,7 @@ class InstructionTab(
                 Text(
                     modifier = Modifier.padding(vertical = 8.dp),
                     text = "Steps",
-                    style = MaterialTheme.typography.h3.copy(
+                    style = MaterialTheme.typography.headlineSmall.copy(
                         fontSize = 14.sp
                     )
                 )
@@ -139,14 +138,14 @@ class InstructionTab(
                 ) {
                     Text(
                         text = "${index + 1}.",
-                        style = MaterialTheme.typography.body2.copy(
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             fontSize = 12.sp
                         ),
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = item,
-                        style = MaterialTheme.typography.body2.copy(
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             fontSize = 12.sp
                         ),
                         textAlign = TextAlign.Justify,

@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -60,9 +60,11 @@ class UpdateProfileScreen: Screen {
             },
             uiState = uiState,
             onLoadingDialogDismissRequest = { screenModel.onFinishLoading() }
-        ) {
+        ) { innerPadding ->
             Column(
-                modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp, vertical = 8.dp),
+                modifier = Modifier.fillMaxSize()
+                    .padding(horizontal = 24.dp, vertical = 8.dp)
+                    .padding(innerPadding),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
@@ -119,7 +121,7 @@ class UpdateProfileScreen: Screen {
                 ) {
                     Text(
                         text = "Update Profile",
-                        style = MaterialTheme.typography.body2.copy(
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             color = White
                         )
                     )

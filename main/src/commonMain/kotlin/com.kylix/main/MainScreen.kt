@@ -5,7 +5,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomNavigation
+import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -63,12 +63,12 @@ class MainScreen : Screen {
                         enter = slideInVertically(initialOffsetY = { (it * 1.2).toInt() }),
                         exit = slideOutVertically(targetOffsetY = { (it * 1.2).toInt() })
                     ) {
-                        BottomNavigation(
+                        NavigationBar(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .size(80.dp),
-                            elevation = 8.dp,
-                            backgroundColor = White
+                            tonalElevation = 8.dp,
+                            containerColor = White
                         ) {
                             TabNavigationItem(homeTab)
                             TabNavigationItem(cameraTab)

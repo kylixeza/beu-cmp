@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,13 +24,12 @@ import beukmm.common.generated.resources.ic_unfavorite_white
 import beukmm.components.BaseAppBar
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
+import beukmm.theme.Black
 import beukmm.theme.Error500
-import beukmm.theme.Primary700
 import beukmm.theme.White
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -62,7 +61,7 @@ class DetailScreen(
                     title = detailState.recipe?.name.orEmpty(),
                     onLeftIconClick = { navigator.pop() },
                     rightIcon = if (detailState.isFavorite) Res.drawable.ic_favorite else Res.drawable.ic_unfavorite_white,
-                    rightIconTint = if (detailState.isFavorite) Error500 else White,
+                    rightIconTint = if (detailState.isFavorite) Error500 else Black,
                     onRightIconClick = { screenModel.toggleFavorite(recipeId) }
                 )
             },
@@ -70,10 +69,9 @@ class DetailScreen(
             onLoadingDialogDismissRequest = {
                 screenModel.onFinishLoading()
             },
-        ) {
-
+        ) { innerPadding ->
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize().padding(innerPadding)
             ) {
                 if (detailState.recipe != null) {
                     Card(
@@ -95,7 +93,7 @@ class DetailScreen(
                     Text(
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         text = "Source: ${detailState.recipe?.videoSrc.orEmpty()}",
-                        style = MaterialTheme.typography.body2.copy(
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             fontSize = 10.sp
                         )
                     )

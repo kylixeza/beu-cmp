@@ -1,15 +1,14 @@
 package com.kylix.detail.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -23,7 +22,6 @@ import com.kylix.detail.tabs.AboutTab
 import com.kylix.detail.tabs.InstructionTab
 import com.kylix.detail.tabs.ReviewTab
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailTabNavigation(
     detailState: DetailState
@@ -44,9 +42,9 @@ fun DetailTabNavigation(
         Column {
             TabRow(
                 selectedTabIndex = tabs.indexOf(tabNavigator.current),
-                backgroundColor = White,
+                containerColor = White,
                 indicator = { tabPositions ->
-                    TabRowDefaults.Indicator(
+                    SecondaryIndicator(
                         modifier = Modifier.tabIndicatorOffset(tabPositions[tabs.indexOf(tabNavigator.current)]),
                         color = Primary700
                     )
@@ -60,7 +58,7 @@ fun DetailTabNavigation(
                             Text(
                                 text = tab.options.title,
                                 color = if (tabNavigator.current == tab) Primary700 else Neutral900,
-                                style = MaterialTheme.typography.body2
+                                style = MaterialTheme.typography.bodyMedium
                             )
                         }
                     )

@@ -12,12 +12,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -70,7 +70,7 @@ class LoginScreen: Screen {
             ) {
                 Text(
                     text = "Login",
-                    style = MaterialTheme.typography.h4.copy(
+                    style = MaterialTheme.typography.titleLarge.copy(
                         fontSize = 22.sp
                     )
                 )
@@ -110,7 +110,7 @@ class LoginScreen: Screen {
                     onClick = { screenModel.login() },
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Primary500
+                        containerColor = Primary500
                     ),
                     contentPadding = PaddingValues(8.dp),
                     enabled = loginState.identifier.isNotBlank() && loginState.password.isNotBlank()
@@ -118,7 +118,7 @@ class LoginScreen: Screen {
                     Text(
                         text = "Login",
                         fontSize = 16.sp,
-                        style = MaterialTheme.typography.body1.copy(
+                        style = MaterialTheme.typography.bodyLarge.copy(
                             color = White
                         ),
                     )
@@ -132,7 +132,7 @@ class LoginScreen: Screen {
                     Text("Don't have an account? ")
                     Text(
                         text = "Register",
-                        color = MaterialTheme.colors.primary,
+                        color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.clickable {
                             navigator.push(registerScreen)
                         }

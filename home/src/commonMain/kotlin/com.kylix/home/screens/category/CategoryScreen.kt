@@ -2,6 +2,7 @@ package com.kylix.home.screens.category
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -14,8 +15,6 @@ import beukmm.components.BaseAppBar
 import beukmm.components.RecipeItemVertical
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
-import beukmm.theme.Primary700
-import beukmm.theme.White
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.registry.ScreenRegistry
@@ -52,9 +51,9 @@ class CategoryScreen(
                 )
             },
             uiState = uiState,
-        ) {
+        ) { innerPadding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().padding(innerPadding),
                 contentPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp)
             ) {
                 items(categoryState.recipes) { recipe ->

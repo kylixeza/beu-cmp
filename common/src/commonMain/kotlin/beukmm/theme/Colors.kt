@@ -1,6 +1,6 @@
 package beukmm.theme
 
-import androidx.compose.material.Colors
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 val Primary50 = Color(0xFFFCDAB0)
@@ -47,11 +47,11 @@ val Gold500 = Color(0xFFFFD47F)
 val Gold700 = Color(0xFFFFC24C)
 val Gold900 = Color(0xFFFFA219)
 
-val BeuColors = Colors(
+val BeuColors = lightColorScheme(
     primary = Primary500,
-    primaryVariant = Primary700,
+    primaryContainer= Primary700,
     secondary = Secondary500,
-    secondaryVariant = Secondary700,
+    secondaryContainer = Secondary700,
     background = Neutral50,
     surface = Neutral100,
     error = Error500,
@@ -60,5 +60,4 @@ val BeuColors = Colors(
     onBackground = Neutral800,
     onSurface = Neutral800,
     onError = Neutral800,
-    isLight = true
 )

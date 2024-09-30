@@ -7,13 +7,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +34,7 @@ fun ReviewSnacker(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-        backgroundColor = Primary900,
+        colors = CardDefaults.cardColors(containerColor = Primary900),
         shape = RoundedCornerShape(12.dp)
     ) {
         Row(
@@ -60,14 +61,14 @@ fun ReviewSnacker(
             ) {
                 Text(
                     text = "Let's give review!",
-                    style = MaterialTheme.typography.h5.copy(
+                    style = MaterialTheme.typography.titleMedium.copy(
                         color = White,
                         fontSize = 14.sp
                     )
                 )
                 Text(
                     text = "You've been cooking for $cookingSessionDuration",
-                    style = MaterialTheme.typography.body2.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         color = White,
                         fontSize = 12.sp
                     )
@@ -76,15 +77,13 @@ fun ReviewSnacker(
             
             Button(
                 onClick = onReviewNow,
-                colors = ButtonDefaults.buttonColors(backgroundColor = White),
+                colors = ButtonDefaults.buttonColors(containerColor = White),
                 modifier = Modifier.wrapContentSize()
             ) {
                 Text(
                     text = "Review Now",
                     color = Primary900,
-                    style = MaterialTheme.typography.h5.copy(
-                        fontSize = 12.sp
-                    )
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 12.sp)
                 )
             }
         }

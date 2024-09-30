@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -61,7 +61,7 @@ class HomeScreen : Screen {
             statusBarColor = Primary500
         ) { innerPadding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().padding(innerPadding),
                 contentPadding = PaddingValues(top = 12.dp, bottom = 86.dp)
             ) {
 
@@ -69,7 +69,7 @@ class HomeScreen : Screen {
                       Text(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                         text = "Categories",
-                        style = MaterialTheme.typography.body1.copy(
+                        style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.SemiBold
                         )
                     )
@@ -101,7 +101,7 @@ class HomeScreen : Screen {
                     Text(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                         text = it.title,
-                        style = MaterialTheme.typography.body1.copy(
+                        style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.SemiBold
                         )
                     )
@@ -111,7 +111,7 @@ class HomeScreen : Screen {
                         Text(
                             modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                             text = it.subtitle.orEmpty(),
-                            style = MaterialTheme.typography.body2
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                     Spacer(modifier = Modifier.height(4.dp))

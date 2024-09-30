@@ -13,9 +13,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,14 +24,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import beukmm.theme.Neutral300
-import beukmm.theme.Neutral400
 import beukmm.theme.Primary500
 import beukmm.theme.White
 
@@ -73,7 +69,7 @@ fun BeuBasicTextField(
             .heightIn(min = minSize, max = maxSize),
         enabled = enabled,
         readOnly = readOnly,
-        textStyle = MaterialTheme.typography.body1,
+        textStyle = MaterialTheme.typography.bodyLarge,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         singleLine = singleLine,
@@ -120,7 +116,7 @@ fun BeuBasicTextField(
                         Text(
                             text = label,
                             textAlign = TextAlign.Start,
-                            style = MaterialTheme.typography.body1.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 color = Color.LightGray
                             ),
                         )

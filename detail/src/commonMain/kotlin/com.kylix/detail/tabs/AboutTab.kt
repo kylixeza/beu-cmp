@@ -14,9 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,7 +67,7 @@ class AboutTab(
             item {
                 Text(
                     text = "Nutrition Information",
-                    style = MaterialTheme.typography.h3.copy(
+                    style = MaterialTheme.typography.headlineSmall.copy(
                         fontSize = 14.sp
                     )
                 )
@@ -93,14 +93,14 @@ class AboutTab(
             Column {
                 Text(
                     text = "Review Summary",
-                    style = MaterialTheme.typography.h3.copy(
+                    style = MaterialTheme.typography.headlineSmall.copy(
                         fontSize = 14.sp
                     )
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "Reviewed ${detailState.recipe?.reviews?.size} time${detailState.recipe?.reviews?.size?.let { if (it > 1) "s" else "" }}",
-                    style = MaterialTheme.typography.body2.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         fontSize = 10.sp,
                     )
                 )
@@ -115,7 +115,7 @@ class AboutTab(
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = detailState.recipe?.averageRating.toString(),
-                    style = MaterialTheme.typography.h5.copy(
+                    style = MaterialTheme.typography.titleMedium.copy(
                         fontSize = 16.sp,
                         color = Primary700
                     )
@@ -129,14 +129,14 @@ class AboutTab(
         Column {
             Text(
                 text = "Description",
-                style = MaterialTheme.typography.h3.copy(
+                style = MaterialTheme.typography.headlineSmall.copy(
                     fontSize = 14.sp
                 )
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = detailState.recipe?.description.orEmpty(),
-                style = MaterialTheme.typography.body2.copy(
+                style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 12.sp
                 )
             )
@@ -148,14 +148,14 @@ class AboutTab(
         Column {
             Text(
                 text = "Estimate Time",
-                style = MaterialTheme.typography.h3.copy(
+                style = MaterialTheme.typography.headlineSmall.copy(
                     fontSize = 14.sp
                 )
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = "${detailState.recipe?.estimateTime}",
-                style = MaterialTheme.typography.body2.copy(
+                style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 12.sp
                 )
             )
@@ -184,7 +184,7 @@ class AboutTab(
 
             Text(
                 text = nutritionName,
-                style = MaterialTheme.typography.body2.copy(
+                style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp
                 ),
                 modifier = Modifier.weight(1f)
@@ -194,7 +194,7 @@ class AboutTab(
 
             Text(
                 text = nutritionAmount,
-                style = MaterialTheme.typography.h5.copy(
+                style = MaterialTheme.typography.titleMedium.copy(
                     fontSize = 12.sp,
                     color = Primary500
                 )

@@ -70,15 +70,15 @@ class OnBoardScreen: Screen {
         }
 
         LaunchedEffect(
-            key1 = uiState.value?.isSuccess,
+            key1 = uiState.value.isSuccess,
             block = {
-                if (uiState.value?.isSuccess == true) {
+                if (uiState.value.isSuccess) {
                     navigator.replace(loginScreen)
                 }
             }
         )
 
-        if (uiState.value?.isLoading == true) {
+        if (uiState.value.isLoading) {
             LoadingDialog(
                 onDismissRequest = {
                     screenModel.onFinishLoading()

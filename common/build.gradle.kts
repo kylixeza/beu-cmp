@@ -30,7 +30,7 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.runtime)
             implementation(compose.ui)
             implementation(compose.components.resources)

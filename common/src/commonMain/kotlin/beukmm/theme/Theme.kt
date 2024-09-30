@@ -1,6 +1,6 @@
 package beukmm.theme
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import beukmm.components.PlatformColors
 
@@ -13,7 +13,7 @@ fun BeuTheme(
         navBarColor = BeuColors.primary
     )
     MaterialTheme(
-        colors = BeuColors,
+        colorScheme = BeuColors,
         typography = BeuTypography(),
         content = content
     )
