@@ -14,7 +14,7 @@ androidx-lifecycle = "2.8.0"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 androidx-media3 = "1.1.0"
-compose-plugin = "1.7.0-beta02"
+compose-plugin = "1.6.11"
 junit = "4.13.2"
 kotlin = "2.0.20"
 voyager = "1.1.0-beta02"
@@ -32,7 +32,6 @@ composeIcons = "1.1.0"
 kamel = "0.9.5"
 datetime = "0.6.1"
 imagepickncrop = "1.0.2"
-cameraK = "0.0.6"
 tflite = "2.16.1"
 tfliteSupport = "0.4.4"
 
@@ -120,9 +119,6 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 
 # Image Pick & Crop
 chaintech-imagepickncrop = { group = "network.chaintech", name = "cmp-image-pick-n-crop", version.ref="imagepickncrop" }
-
-# CameraK
-cameraK = { group = "io.github.kashif-mehmood-km", name = "camerak", version.ref="cameraK" }
 
 # TFLite
 tflite = { group = "org.tensorflow", name = "tensorflow-lite", version.ref="tflite" }

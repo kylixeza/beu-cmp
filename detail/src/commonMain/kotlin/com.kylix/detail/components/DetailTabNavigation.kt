@@ -1,5 +1,6 @@
 package com.kylix.detail.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -22,6 +23,7 @@ import com.kylix.detail.tabs.AboutTab
 import com.kylix.detail.tabs.InstructionTab
 import com.kylix.detail.tabs.ReviewTab
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailTabNavigation(
     detailState: DetailState

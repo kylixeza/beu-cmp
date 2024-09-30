@@ -40,7 +40,6 @@ kotlin {
             implementation(libs.bundles.composeIcons)
             implementation(libs.kermit.log)
             implementation(libs.result)
-            implementation(libs.cameraK)
 
             api(projects.common)
             api(projects.core)

@@ -3,6 +3,7 @@ package com.kylix.onboard.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import beukmm.theme.Primary500
 import beukmm.theme.White
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FinishButton(
     modifier: Modifier = Modifier,
