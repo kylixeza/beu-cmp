@@ -24,6 +24,23 @@ class ProfileScreenModel(
     var profileState = MutableStateFlow(ProfileState())
         private set
 
+    fun getProfile() {
+        onSuspendProcess {
+            profileRepository.getProfile().foldResult(
+                onSuccess = { profile ->
+                    profileState.update {
+                        it.copy(
+                            username = profile.username,
+                            avatar = profile.avatar,
+                        )
+                    }
+                },
+                onError = { error ->
+                    onDataError(error)
+                }
+            )
+        }
+    }
 
     init {
         val sections = listOf(
@@ -74,21 +91,8 @@ class ProfileScreenModel(
             )
         )
 
-        onSuspendProcess {
-            profileRepository.getProfile().foldResult(
-                onSuccess = { profile ->
-                    profileState.update {
-                        it.copy(
-                            username = profile.username,
-                            avatar = profile.avatar,
-                            sections = sections
-                        )
-                    }
-                },
-                onError = { error ->
-                    onDataError(error)
-                }
-            )
+        profileState.update {
+            it.copy(sections = sections)
         }
     }
 

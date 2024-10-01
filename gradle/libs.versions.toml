@@ -10,7 +10,7 @@ androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.6.1"
-androidx-lifecycle = "2.8.0"
+androidx-lifecycle = "2.8.2"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 androidx-media3 = "1.1.0"
@@ -35,6 +35,7 @@ imagepickncrop = "1.0.2"
 tflite = "2.16.1"
 tfliteSupport = "0.4.4"
 peekaboo = "0.5.2"
+lifecycletracker = "1.0.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -49,6 +50,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 
 # Voyager
 voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
@@ -131,6 +133,9 @@ tflite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata",
 # Peekaboo
 peekaboo-ui = { module = "io.github.onseok:peekaboo-ui", version.ref = "peekaboo" }
 peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", version.ref = "peekaboo" }
+
+# Lifecycle Tracker
+lifecycle-tracker = { module = "io.github.kevinnzou:compose-multiplatform-lifecycle-tracker", version.ref = "lifecycletracker" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

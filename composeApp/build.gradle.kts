@@ -32,6 +32,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.lifecycle.runtime.ktx)
 
             implementation(libs.koin.android)
             implementation(libs.koin.android.compose)
@@ -49,6 +50,7 @@ kotlin {
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.koin)
             implementation(libs.kamel)
+            implementation(libs.lifecycle.tracker)
 
             implementation(projects.navigation)
         }

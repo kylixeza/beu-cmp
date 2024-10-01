@@ -15,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,6 +35,10 @@ import beukmm.theme.White
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.multiplatform.lifecycle.LifecycleEvent
+import com.multiplatform.lifecycle.LifecycleObserver
+import com.multiplatform.lifecycle.LocalLifecycleTracker
+import com.multiplatform.lifecycle.State
 import com.preat.peekaboo.image.picker.SelectionMode
 import com.preat.peekaboo.image.picker.rememberImagePickerLauncher
 import io.kamel.image.KamelImage
@@ -53,6 +58,8 @@ class UpdateProfileScreen: Screen {
         val uiState by screenModel.uiState.collectAsState()
 
         val navigator = LocalNavigator.currentOrThrow
+
+        val lifecycleTracker = LocalLifecycleTracker.current
 
         val scope = rememberCoroutineScope()
         val singleImagePicker = rememberImagePickerLauncher(

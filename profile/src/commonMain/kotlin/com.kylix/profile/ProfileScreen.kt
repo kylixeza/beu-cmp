@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,8 +34,13 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import co.touchlab.kermit.Logger
 import com.kylix.profile.components.ItemSetting
 import com.kylix.profile.screens.UpdateProfileScreen
+import com.multiplatform.lifecycle.LifecycleEvent
+import com.multiplatform.lifecycle.LifecycleObserver
+import com.multiplatform.lifecycle.LocalLifecycleTracker
+import com.multiplatform.lifecycle.State
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.kamel.image.config.LocalKamelConfig
@@ -46,9 +52,27 @@ class ProfileScreen: Screen {
 
         val screenModel = koinScreenModel<ProfileScreenModel>()
         val profileState by screenModel.profileState.collectAsState()
+        val uiState by screenModel.uiState.collectAsState()
 
         val navigator = LocalNavigator.currentOrThrow
         val loginScreen = rememberScreen(SharedScreen.Login)
+
+        val lifecycleTracker = LocalLifecycleTracker.current
+
+        DisposableEffect(Unit) {
+            val listener =
+                object : LifecycleObserver {
+                    override fun onEvent(event: LifecycleEvent) {
+                        if (event == LifecycleEvent.OnResumeEvent) {
+                            screenModel.getProfile()
+                        }
+                    }
+                }
+            lifecycleTracker.addObserver(listener)
+            onDispose {
+                lifecycleTracker.removeObserver(listener)
+            }
+        }
 
         BaseScreenContent(
             topBar = {
@@ -57,15 +81,15 @@ class ProfileScreen: Screen {
                     title = "Profile",
                     leftIcon = null,
                 )
-            }
+            },
+            uiState = uiState,
+            onLoadingDialogDismissRequest = { screenModel.onFinishLoading() }
         ) { innerPadding ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(innerPadding),
                 contentPadding = PaddingValues(
-                    start = 24.dp,
-                    end = 24.dp,
-                    top = 12.dp,
-                    bottom = 92.dp
+                    start = 24.dp, end = 24.dp,
+                    top = 12.dp, bottom = 92.dp
                 )
             ) {
                 item {
