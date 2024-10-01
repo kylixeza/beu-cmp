@@ -57,7 +57,7 @@ class ProfileRepositoryImpl(
         user: User,
         newAvatar: ByteArray?
     ): Result<Success<Unit>, Error> {
-        return object : BaseNetworkRequest<Unit, String>() {
+        return object : BaseNetworkRequest<Unit, UserResponse>() {
             override suspend fun createCall(): HttpResponse {
                 val body = UserRequest(
                     username = user.username,
@@ -69,11 +69,11 @@ class ProfileRepositoryImpl(
                 return profileService.updateProfile(jsonBody, newAvatar)
             }
 
-            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<String>> {
-                return BaseResponse.serializer(String.serializer())
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<UserResponse>> {
+                return BaseResponse.serializer(UserResponse.serializer())
             }
 
-            override suspend fun String.mapResponse() {
+            override suspend fun UserResponse.mapResponse() {
                 return
             }
 

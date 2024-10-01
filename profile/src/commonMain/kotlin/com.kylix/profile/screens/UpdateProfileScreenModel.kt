@@ -35,7 +35,7 @@ class UpdateProfileScreenModel(
         }
     }
 
-    fun setNewAvatar(newAvatar: ImageBitmap) {
+    fun setNewAvatar(newAvatar: ByteArray?) {
         updateProfileState.update {
             it.copy(newAvatar = newAvatar)
         }
@@ -53,12 +53,6 @@ class UpdateProfileScreenModel(
         }
     }
 
-    fun setPickerState(open: Boolean) {
-        updateProfileState.update {
-            it.copy(openImagePicker = open)
-        }
-    }
-
     fun updateProfile() {
         val newUser = updateProfileState.value.user?.copy(
             username = updateProfileState.value.username,
@@ -69,7 +63,7 @@ class UpdateProfileScreenModel(
         onSuspendProcess {
             repository.updateProfile(
                 user = newUser ?: return@onSuspendProcess,
-                newAvatar = newAvatar?.toByteArray()
+                newAvatar = newAvatar
             ).foldResult(
                 onSuccess = {
                     onDataSuccess()
@@ -86,6 +80,6 @@ data class UpdateProfileState(
     val user: User? = null,
     val username: String = "",
     val email: String = "",
-    val newAvatar: ImageBitmap? = null,
+    val newAvatar: ByteArray? = null,
     val openImagePicker: Boolean = false
 )

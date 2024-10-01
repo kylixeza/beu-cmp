@@ -34,6 +34,7 @@ datetime = "0.6.1"
 imagepickncrop = "1.0.2"
 tflite = "2.16.1"
 tfliteSupport = "0.4.4"
+peekaboo = "0.5.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -126,6 +127,10 @@ tflite-gpu = { group = "org.tensorflow", name = "tensorflow-lite-gpu", version.r
 tflite-gpuApi = { group = "org.tensorflow", name = "tensorflow-lite-gpu-api", version.ref="tflite" }
 tflite-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version.ref="tfliteSupport" }
 tflite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref="tfliteSupport" }
+
+# Peekaboo
+peekaboo-ui = { module = "io.github.onseok:peekaboo-ui", version.ref = "peekaboo" }
+peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", version.ref = "peekaboo" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -5,6 +5,7 @@ import io.ktor.client.request.forms.formData
 import io.ktor.client.request.forms.submitFormWithBinaryData
 import io.ktor.client.request.get
 import io.ktor.client.request.put
+import io.ktor.http.Headers
 import io.ktor.http.HttpMethod
 
 class ProfileService(
@@ -23,7 +24,10 @@ class ProfileService(
         formData = formData {
             append("body", jsonBody)
             if (avatar != null) {
-                append("image", avatar)
+                append("image", avatar, Headers.build {
+                    append("Content-Type", "image/jpeg")
+                    append("Content-Disposition", "form-data; name=\"avatar\"; filename=\"avatar.jpg\"")
+                })
             }
         }
     ) {

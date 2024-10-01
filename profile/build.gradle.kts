@@ -37,7 +37,7 @@ kotlin {
             implementation(libs.kamel)
             implementation(libs.result)
             implementation(libs.kermit.log)
-            implementation(libs.chaintech.imagepickncrop)
+            implementation(libs.peekaboo.image.picker)
 
             api(projects.common)
             api(projects.core)

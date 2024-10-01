@@ -18,10 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
@@ -34,14 +34,17 @@ import beukmm.theme.White
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.preat.peekaboo.image.picker.SelectionMode
+import com.preat.peekaboo.image.picker.rememberImagePickerLauncher
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import network.chaintech.cmpimagepickncrop.CMPImagePickNCropDialog
-import network.chaintech.cmpimagepickncrop.imagecropper.rememberImageCropper
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.decodeToImageBitmap
 import org.jetbrains.compose.resources.painterResource
 
 class UpdateProfileScreen: Screen {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
 
@@ -50,6 +53,17 @@ class UpdateProfileScreen: Screen {
         val uiState by screenModel.uiState.collectAsState()
 
         val navigator = LocalNavigator.currentOrThrow
+
+        val scope = rememberCoroutineScope()
+        val singleImagePicker = rememberImagePickerLauncher(
+            selectionMode = SelectionMode.Single,
+            scope = scope,
+            onResult = { byteArrays ->
+                byteArrays.firstOrNull()?.let {
+                    screenModel.setNewAvatar(it)
+                }
+            }
+        )
 
         BaseScreenContent(
             topBar = {
@@ -80,11 +94,14 @@ class UpdateProfileScreen: Screen {
                             modifier = Modifier.size(100.dp).clip(shape = CircleShape)
                         )
                     } else {
-                        Image(
-                            bitmap = updateProfileState.newAvatar ?: ImageBitmap(100, 100),
-                            contentDescription = "Avatar",
-                            modifier = Modifier.size(100.dp).clip(shape = CircleShape)
-                        )
+                        updateProfileState.newAvatar?.decodeToImageBitmap()?.let {
+                            Image(
+                                bitmap = it,
+                                contentDescription = "Avatar",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.size(100.dp).clip(shape = CircleShape)
+                            )
+                        }
                     }
 
 
@@ -93,7 +110,7 @@ class UpdateProfileScreen: Screen {
                         contentDescription = "Edit",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.size(36.dp).align(Alignment.BottomEnd).clickable {
-                            screenModel.setPickerState(true)
+                            singleImagePicker.launch()
                         }
                     )
                 }
@@ -128,17 +145,6 @@ class UpdateProfileScreen: Screen {
                 }
             }
         }
-
-        CMPImagePickNCropDialog(
-            imageCropper = rememberImageCropper(),
-            openImagePicker = updateProfileState.openImagePicker,
-            imagePickerDialogHandler = {
-                screenModel.setPickerState(it)
-            },
-            selectedImageCallback = {
-                screenModel.setNewAvatar(it)
-            }
-        )
 
         LaunchedEffect(key1 = uiState.isSuccess) {
             if (uiState.isSuccess) {
