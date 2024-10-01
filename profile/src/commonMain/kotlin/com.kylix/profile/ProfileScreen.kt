@@ -34,13 +34,13 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import co.touchlab.kermit.Logger
 import com.kylix.profile.components.ItemSetting
-import com.kylix.profile.screens.UpdateProfileScreen
+import com.kylix.profile.model.ProfileSetting
+import com.kylix.profile.screens.favorite.FavoriteScreen
+import com.kylix.profile.screens.update_profile.UpdateProfileScreen
 import com.multiplatform.lifecycle.LifecycleEvent
 import com.multiplatform.lifecycle.LifecycleObserver
 import com.multiplatform.lifecycle.LocalLifecycleTracker
-import com.multiplatform.lifecycle.State
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.kamel.image.config.LocalKamelConfig
@@ -125,7 +125,15 @@ class ProfileScreen: Screen {
                         ItemSetting(
                             setting = setting,
                             onClick = {
-                                navigator.push(UpdateProfileScreen())
+                                when(setting.setting) {
+                                    ProfileSetting.UPDATE_PROFILE -> { navigator.push(UpdateProfileScreen()) }
+                                    ProfileSetting.UPDATE_PASSWORD -> { }
+                                    ProfileSetting.HISTORY -> {  }
+                                    ProfileSetting.FAVORITE -> { navigator.push(FavoriteScreen()) }
+                                    ProfileSetting.PRIVACY_POLICY -> {  }
+                                    ProfileSetting.TERMS_AND_CONDITIONS -> {  }
+                                    ProfileSetting.HELP -> {  }
+                                }
                             }
                         )
                     }

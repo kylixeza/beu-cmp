@@ -1,8 +1,6 @@
-package com.kylix.profile.screens
+package com.kylix.profile.screens.update_profile
 
-import androidx.compose.ui.graphics.ImageBitmap
 import beukmm.base.BaseScreenModel
-import beukmm.util.toByteArray
 import com.kylix.core.model.User
 import com.kylix.core.repositories.profile.ProfileRepository
 import com.kylix.core.util.foldResult
