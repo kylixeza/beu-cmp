@@ -5,6 +5,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +34,8 @@ import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import chaintech.videoplayer.model.PlayerConfig
+import chaintech.videoplayer.ui.video.VideoPlayerView
 import com.kylix.detail.components.DetailTabNavigation
 import com.kylix.detail.components.ReviewSnacker
 import com.kylix.detail.components.VideoPlayer
@@ -77,16 +80,20 @@ class DetailScreen(
                     Card(
                         modifier = Modifier
                             .padding(8.dp)
+                            .fillMaxWidth()
                             .height(210.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        VideoPlayer(
+
+                        VideoPlayerView(
                             modifier = Modifier.fillMaxSize(),
                             url = detailState.recipe?.video.orEmpty(),
-                            onVideoFinished = {
-                                screenModel.onVideoFinished()
-                                screenModel.postHistory(recipeId)
-                            }
+                            playerConfig = PlayerConfig(
+                                didEndVideo = {
+                                    screenModel.onVideoFinished()
+                                    screenModel.postHistory(recipeId)
+                                }
+                            )
                         )
                     }
 

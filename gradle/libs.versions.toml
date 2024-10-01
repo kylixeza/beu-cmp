@@ -32,6 +32,7 @@ composeIcons = "1.1.0"
 kamel = "0.9.5"
 datetime = "0.6.1"
 imagepickncrop = "1.0.2"
+mediaplayer = "1.0.22"
 tflite = "2.16.1"
 tfliteSupport = "0.4.4"
 peekaboo = "0.5.2"
@@ -122,6 +123,9 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 
 # Image Pick & Crop
 chaintech-imagepickncrop = { group = "network.chaintech", name = "cmp-image-pick-n-crop", version.ref="imagepickncrop" }
+
+# Media Player
+chaintech-mediaplayer = { group = "network.chaintech", name = "compose-multiplatform-media-player", version.ref="mediaplayer" }
 
 # TFLite
 tflite = { group = "org.tensorflow", name = "tensorflow-lite", version.ref="tflite" }

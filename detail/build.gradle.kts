@@ -41,6 +41,7 @@ kotlin {
             implementation(libs.kamel)
             implementation(libs.result)
             implementation(libs.kermit.log)
+            implementation(libs.chaintech.mediaplayer)
 
             api(projects.common)
             api(projects.core)
