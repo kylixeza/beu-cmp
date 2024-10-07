@@ -8,7 +8,6 @@ import cafe.adriel.voyager.core.registry.screenModule
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.transitions.ScreenTransition
-import com.kylix.reset_password.ResetPasswordScreen
 import com.kylix.splash.screen.SplashScreen
 
 val splashNavigationScreenModule = screenModule {
@@ -21,7 +20,7 @@ val splashNavigationScreenModule = screenModule {
 @Composable
 fun AppNavigator() {
     Navigator(
-        ResetPasswordScreen(),
+        SplashScreen(),
         disposeBehavior = NavigatorDisposeBehavior(disposeSteps = false)
     ) { navigator ->
         ScreenTransition(
