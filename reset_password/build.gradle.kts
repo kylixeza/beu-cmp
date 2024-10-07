@@ -28,25 +28,26 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
-            api(projects.splash)
-            api(projects.onboard)
-            api(projects.auth)
-            api(projects.main)
-            api(projects.detail)
-            api(projects.review)
-            api(projects.camera)
-            api(projects.profile)
-            api(projects.resetPassword)
-
-            implementation(libs.bundles.koin)
             implementation(libs.bundles.voyager)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.composeIcons)
+            implementation(libs.kamel)
+            implementation(libs.result)
+            implementation(libs.kermit.log)
+            implementation(libs.peekaboo.image.picker)
+            implementation(libs.lifecycle.tracker)
+
+            api(projects.common)
+            api(projects.core)
         }
     }
 }
 
 android {
-    namespace = "com.kylix.navigation"
+    namespace = "com.kylix.reset_password"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -58,8 +59,4 @@ android {
     buildFeatures {
         compose = true
     }
-}
-dependencies {
-    implementation(project(":onboard"))
-    implementation(project(":auth"))
 }

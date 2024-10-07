@@ -12,4 +12,9 @@ interface ProfileRepository {
         user: User,
         newAvatar: ByteArray?
     ): Result<Success<Unit>, Error>
+
+    suspend fun resetPassword(
+        newPassword: String
+    ): Result<Success<Unit>, Error>
+
 }

@@ -12,6 +12,7 @@ import com.kylix.detail.di.detailModule
 import com.kylix.home.di.homeModule
 import com.kylix.onboard.di.onBoardModule
 import com.kylix.profile.di.profileModule
+import com.kylix.reset_password.di.resetPasswordModule
 import com.kylix.review.di.reviewModule
 import com.kylix.splash.di.splashModule
 import org.koin.core.context.startKoin
@@ -36,7 +37,8 @@ fun installKoin(
             reviewModule,
             cameraModule,
             tfLitePlatformModule,
-            profileModule
+            profileModule,
+            resetPasswordModule
         )
     }
 }

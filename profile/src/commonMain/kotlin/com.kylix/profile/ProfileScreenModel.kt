@@ -53,9 +53,9 @@ class ProfileScreenModel(
                         setting = ProfileSetting.UPDATE_PROFILE
                     ),
                     Setting(
-                        name = "Update Password",
+                        name = "Reset Password",
                         icon = Res.drawable.ic_profile_update_password,
-                        setting = ProfileSetting.UPDATE_PASSWORD
+                        setting = ProfileSetting.RESET_PASSWORD
                     ),
                     Setting(
                         name = "History",

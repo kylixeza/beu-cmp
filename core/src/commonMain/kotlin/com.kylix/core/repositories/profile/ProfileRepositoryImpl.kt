@@ -2,6 +2,7 @@ package com.kylix.core.repositories.profile
 
 import com.github.michaelbull.result.Result
 import com.kylix.core.base.BaseNetworkRequest
+import com.kylix.core.data.remote.requests.PasswordRequest
 import com.kylix.core.data.remote.requests.UserRequest
 import com.kylix.core.data.remote.responses.BaseResponse
 import com.kylix.core.data.remote.responses.profile.UserResponse
@@ -74,6 +75,24 @@ class ProfileRepositoryImpl(
             }
 
             override suspend fun UserResponse.mapResponse() {
+                return
+            }
+
+        }.run()
+    }
+
+    override suspend fun resetPassword(newPassword: String): Result<Success<Unit>, Error> {
+        return object : BaseNetworkRequest<Unit, String>() {
+            override suspend fun createCall(): HttpResponse {
+                val body = PasswordRequest(newPassword)
+                return profileService.resetPassword(body)
+            }
+
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<String>> {
+                return BaseResponse.serializer(String.serializer())
+            }
+
+            override suspend fun String.mapResponse() {
                 return
             }
 

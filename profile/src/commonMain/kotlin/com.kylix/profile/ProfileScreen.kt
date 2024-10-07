@@ -55,6 +55,7 @@ class ProfileScreen: Screen {
         val uiState by screenModel.uiState.collectAsState()
 
         val navigator = LocalNavigator.currentOrThrow
+        val resetPasswordScreen = rememberScreen(SharedScreen.ResetPassword)
         val loginScreen = rememberScreen(SharedScreen.Login)
 
         val lifecycleTracker = LocalLifecycleTracker.current
@@ -127,7 +128,7 @@ class ProfileScreen: Screen {
                             onClick = {
                                 when(setting.setting) {
                                     ProfileSetting.UPDATE_PROFILE -> { navigator.push(UpdateProfileScreen()) }
-                                    ProfileSetting.UPDATE_PASSWORD -> { }
+                                    ProfileSetting.RESET_PASSWORD -> { navigator.push(resetPasswordScreen) }
                                     ProfileSetting.HISTORY -> {  }
                                     ProfileSetting.FAVORITE -> { navigator.push(FavoriteScreen()) }
                                     ProfileSetting.PRIVACY_POLICY -> {  }

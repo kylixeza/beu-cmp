@@ -15,7 +15,7 @@ data class Setting(
 
 enum class ProfileSetting {
     UPDATE_PROFILE,
-    UPDATE_PASSWORD,
+    RESET_PASSWORD,
     HISTORY,
     FAVORITE,
     PRIVACY_POLICY,

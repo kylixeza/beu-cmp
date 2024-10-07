@@ -1,6 +1,7 @@
 package beukmm.base
 
 import StackedSnackbarHost
+import StackedSnakbarHostState
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -25,7 +26,8 @@ fun BaseScreenContent(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
-    snackbarHost: @Composable (SnackbarHostState) -> Unit = { SnackbarHost(it) },
+    snackbarHost: @Composable () -> Unit = { },
+    stackedSnackbarHostState: StackedSnakbarHostState = rememberStackedSnackbarHostState(),
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     contentColor: Color = White,
@@ -37,9 +39,6 @@ fun BaseScreenContent(
     navBarColor: Color = Color.Transparent,
     content: @Composable (PaddingValues) -> Unit
 ) {
-
-    val stackedSnackbarHostState = rememberStackedSnackbarHostState()
-
     PlatformColors(statusBarColor, navBarColor)
 
     Scaffold(
@@ -48,6 +47,7 @@ fun BaseScreenContent(
         bottomBar = bottomBar,
         snackbarHost = {
             StackedSnackbarHost(hostState = stackedSnackbarHostState)
+            snackbarHost()
         },
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
