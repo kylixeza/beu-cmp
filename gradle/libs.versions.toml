@@ -37,6 +37,7 @@ tflite = "2.16.1"
 tfliteSupport = "0.4.4"
 peekaboo = "0.5.2"
 lifecycletracker = "1.0.0"
+webview = "1.9.20"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -140,6 +141,9 @@ peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", ver
 
 # Lifecycle Tracker
 lifecycle-tracker = { module = "io.github.kevinnzou:compose-multiplatform-lifecycle-tracker", version.ref = "lifecycletracker" }
+
+#WebView
+webview = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "webview" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

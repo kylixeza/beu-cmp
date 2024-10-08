@@ -44,6 +44,7 @@ kotlin {
             implementation(libs.kermit.log)
             implementation(libs.kamel)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.webview)
 
             api(libs.stackedSnackbar)
         }

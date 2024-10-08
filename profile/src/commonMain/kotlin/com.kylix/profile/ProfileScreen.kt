@@ -38,6 +38,8 @@ import com.kylix.profile.components.ItemSetting
 import com.kylix.profile.model.ProfileSetting
 import com.kylix.profile.screens.favorite.FavoriteScreen
 import com.kylix.profile.screens.history.HistoryScreen
+import com.kylix.profile.screens.privacy_policy.PrivacyPolicyScreen
+import com.kylix.profile.screens.terms_conditions.TermsConditionsScreen
 import com.kylix.profile.screens.update_profile.UpdateProfileScreen
 import com.multiplatform.lifecycle.LifecycleEvent
 import com.multiplatform.lifecycle.LifecycleObserver
@@ -132,8 +134,8 @@ class ProfileScreen: Screen {
                                     ProfileSetting.RESET_PASSWORD -> { navigator.push(resetPasswordScreen) }
                                     ProfileSetting.HISTORY -> navigator.push(HistoryScreen())
                                     ProfileSetting.FAVORITE -> { navigator.push(FavoriteScreen()) }
-                                    ProfileSetting.PRIVACY_POLICY -> {  }
-                                    ProfileSetting.TERMS_AND_CONDITIONS -> {  }
+                                    ProfileSetting.PRIVACY_POLICY -> navigator.push(PrivacyPolicyScreen())
+                                    ProfileSetting.TERMS_AND_CONDITIONS -> navigator.push(TermsConditionsScreen())
                                     ProfileSetting.HELP -> {  }
                                 }
                             }

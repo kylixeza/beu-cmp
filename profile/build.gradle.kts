@@ -39,6 +39,7 @@ kotlin {
             implementation(libs.kermit.log)
             implementation(libs.peekaboo.image.picker)
             implementation(libs.lifecycle.tracker)
+            implementation(libs.webview)
 
             api(projects.common)
             api(projects.core)
