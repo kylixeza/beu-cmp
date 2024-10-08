@@ -44,10 +44,6 @@ class HomeScreen : Screen {
 
         val navigator = LocalNavigator.currentOrThrow
 
-        LifecycleEffectOnce {
-            screenModel.getHomeDate()
-        }
-
         BaseScreenContent(
             modifier = Modifier.fillMaxWidth(),
             topBar = {

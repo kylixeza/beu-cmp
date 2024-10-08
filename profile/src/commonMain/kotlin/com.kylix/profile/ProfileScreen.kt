@@ -37,6 +37,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.kylix.profile.components.ItemSetting
 import com.kylix.profile.model.ProfileSetting
 import com.kylix.profile.screens.favorite.FavoriteScreen
+import com.kylix.profile.screens.history.HistoryScreen
 import com.kylix.profile.screens.update_profile.UpdateProfileScreen
 import com.multiplatform.lifecycle.LifecycleEvent
 import com.multiplatform.lifecycle.LifecycleObserver
@@ -129,7 +130,7 @@ class ProfileScreen: Screen {
                                 when(setting.setting) {
                                     ProfileSetting.UPDATE_PROFILE -> { navigator.push(UpdateProfileScreen()) }
                                     ProfileSetting.RESET_PASSWORD -> { navigator.push(resetPasswordScreen) }
-                                    ProfileSetting.HISTORY -> {  }
+                                    ProfileSetting.HISTORY -> navigator.push(HistoryScreen())
                                     ProfileSetting.FAVORITE -> { navigator.push(FavoriteScreen()) }
                                     ProfileSetting.PRIVACY_POLICY -> {  }
                                     ProfileSetting.TERMS_AND_CONDITIONS -> {  }
