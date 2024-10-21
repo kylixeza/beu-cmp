@@ -3,6 +3,7 @@ package com.kylix.core.di
 import com.kylix.core.data.local.BeuDataStore
 import com.kylix.core.data.remote.services.AuthService
 import com.kylix.core.data.remote.services.FavoriteService
+import com.kylix.core.data.remote.services.HelpCenterService
 import com.kylix.core.data.remote.services.HistoryService
 import com.kylix.core.data.remote.services.ProfileService
 import com.kylix.core.data.remote.services.RecipeService
@@ -11,6 +12,8 @@ import com.kylix.core.repositories.auth.AuthRepository
 import com.kylix.core.repositories.auth.AuthRepositoryImpl
 import com.kylix.core.repositories.favorite.FavoriteRepository
 import com.kylix.core.repositories.favorite.FavoriteRepositoryImpl
+import com.kylix.core.repositories.help_center.HelpCenterRepository
+import com.kylix.core.repositories.help_center.HelpCenterRepositoryImpl
 import com.kylix.core.repositories.history.HistoryRepository
 import com.kylix.core.repositories.history.HistoryRepositoryImpl
 import com.kylix.core.repositories.profile.ProfileRepository
@@ -39,6 +42,7 @@ val networkModule = module {
     single { FavoriteService(get()) }
     single { HistoryService(get()) }
     single { ReviewService(get()) }
+    single { HelpCenterService(get()) }
 }
 
 val repositoriesModule = module {
@@ -49,4 +53,5 @@ val repositoriesModule = module {
     single<FavoriteRepository> { FavoriteRepositoryImpl(get()) }
     single<HistoryRepository> { HistoryRepositoryImpl(get()) }
     single<ReviewRepository> { ReviewRepositoryImpl(get()) }
+    single<HelpCenterRepository> { HelpCenterRepositoryImpl(get()) }
 }

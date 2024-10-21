@@ -37,6 +37,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.kylix.profile.components.ItemSetting
 import com.kylix.profile.model.ProfileSetting
 import com.kylix.profile.screens.favorite.FavoriteScreen
+import com.kylix.profile.screens.help_center.HelpCenterScreen
 import com.kylix.profile.screens.history.HistoryScreen
 import com.kylix.profile.screens.privacy_policy.PrivacyPolicyScreen
 import com.kylix.profile.screens.terms_conditions.TermsConditionsScreen
@@ -136,7 +137,7 @@ class ProfileScreen: Screen {
                                     ProfileSetting.FAVORITE -> { navigator.push(FavoriteScreen()) }
                                     ProfileSetting.PRIVACY_POLICY -> navigator.push(PrivacyPolicyScreen())
                                     ProfileSetting.TERMS_AND_CONDITIONS -> navigator.push(TermsConditionsScreen())
-                                    ProfileSetting.HELP -> {  }
+                                    ProfileSetting.HELP -> navigator.push(HelpCenterScreen())
                                 }
                             }
                         )
