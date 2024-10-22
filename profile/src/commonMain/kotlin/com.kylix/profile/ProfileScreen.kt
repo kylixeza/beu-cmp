@@ -148,7 +148,11 @@ class ProfileScreen: Screen {
                     Spacer(modifier = Modifier.height(24.dp))
                     Button(
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = { navigator.replace(loginScreen) }
+                        onClick = {
+                            screenModel.logout(
+                                onLoggedOut = { navigator.replaceAll(loginScreen) }
+                            )
+                        }
                     ) {
                         Text(
                             text = "Logout",

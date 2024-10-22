@@ -6,4 +6,5 @@ import com.kylix.core.util.Success
 
 interface AuthRepository {
     suspend fun login(identifier: String, password: String): Result<Success<Unit>, Error>
+    suspend fun logout(): Result<Success<Unit>, Error>
 }

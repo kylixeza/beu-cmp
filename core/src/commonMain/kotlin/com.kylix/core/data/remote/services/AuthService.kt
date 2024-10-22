@@ -15,4 +15,6 @@ class AuthService(
         setBody(body)
     }
 
+    suspend fun logout() = client.post("logout")
+
 }

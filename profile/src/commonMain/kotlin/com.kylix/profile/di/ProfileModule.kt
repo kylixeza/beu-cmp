@@ -8,7 +8,7 @@ import com.kylix.profile.screens.update_profile.UpdateProfileScreenModel
 import org.koin.dsl.module
 
 val profileModule = module {
-    factory { ProfileScreenModel(get()) }
+    factory { ProfileScreenModel(get(), get()) }
     factory { UpdateProfileScreenModel(get()) }
     factory { FavoriteScreenModel(get()) }
     factory { HistoryScreenModel(get()) }

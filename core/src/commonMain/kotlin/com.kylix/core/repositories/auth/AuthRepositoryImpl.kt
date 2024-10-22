@@ -17,6 +17,7 @@ import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.builtins.NothingSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 
 class AuthRepositoryImpl(
@@ -39,6 +40,25 @@ class AuthRepositoryImpl(
 
             override suspend fun saveCallResult(data: TokenResponse) {
                 dataStore.saveToken(data.token)
+            }
+
+        }.run()
+    }
+
+    override suspend fun logout(): Result<Success<Unit>, Error> {
+        return object : BaseNetworkRequest<Unit, String>() {
+            override suspend fun createCall(): HttpResponse {
+                return authService.logout()
+            }
+
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<String>> {
+                return BaseResponse.serializer(String.serializer())
+            }
+
+            override suspend fun String.mapResponse() {}
+
+            override suspend fun saveCallResult(data: String) {
+                dataStore.clearToken()
             }
 
         }.run()

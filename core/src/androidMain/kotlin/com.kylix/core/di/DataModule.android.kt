@@ -28,7 +28,7 @@ actual val dataStorePlatformModule: Module = module {
 
 }
 actual val networkPlatformModule: Module = module {
-    single {
+    factory {
         val dataStore = get<BeuDataStore>()
         val token = runBlocking { dataStore.getToken() }
         val context = get<Context>()

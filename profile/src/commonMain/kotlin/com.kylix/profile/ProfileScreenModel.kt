@@ -9,6 +9,7 @@ import beukmm.profile.generated.resources.ic_profile_privacy_policy
 import beukmm.profile.generated.resources.ic_profile_terms_and_conditions
 import beukmm.profile.generated.resources.ic_profile_update_password
 import beukmm.profile.generated.resources.ic_profile_update_profile
+import com.kylix.core.repositories.auth.AuthRepository
 import com.kylix.core.repositories.profile.ProfileRepository
 import com.kylix.core.util.foldResult
 import com.kylix.profile.model.ProfileSection
@@ -18,7 +19,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 class ProfileScreenModel(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val authRepository: AuthRepository,
 ): BaseScreenModel() {
 
     var profileState = MutableStateFlow(ProfileState())
@@ -96,6 +98,16 @@ class ProfileScreenModel(
         }
     }
 
+    fun logout(
+        onLoggedOut: () -> Unit = {},
+    ) {
+        onSuspendProcess {
+            authRepository.logout().foldResult(
+                onSuccess = { onLoggedOut() },
+                onError = { onDataError(it) }
+            )
+        }
+    }
 }
 
 data class ProfileState(
