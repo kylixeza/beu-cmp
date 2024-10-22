@@ -33,6 +33,7 @@ kamel = "0.9.5"
 datetime = "0.6.1"
 imagepickncrop = "1.0.2"
 mediaplayer = "1.0.22"
+cameraK = "0.0.7"
 tflite = "2.16.1"
 tfliteSupport = "0.4.4"
 peekaboo = "0.5.2"
@@ -127,6 +128,9 @@ chaintech-imagepickncrop = { group = "network.chaintech", name = "cmp-image-pick
 
 # Media Player
 chaintech-mediaplayer = { group = "network.chaintech", name = "compose-multiplatform-media-player", version.ref="mediaplayer" }
+
+# CameraK
+cameraK = { group = "io.github.kashif-mehmood-km", name = "camerak", version.ref="cameraK" }
 
 # TFLite
 tflite = { group = "org.tensorflow", name = "tensorflow-lite", version.ref="tflite" }

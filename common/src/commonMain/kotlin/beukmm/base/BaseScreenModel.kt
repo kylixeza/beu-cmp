@@ -15,7 +15,7 @@ open class BaseScreenModel: ScreenModel {
     private val _uiState = MutableStateFlow(BaseUIState())
     val uiState = _uiState.asStateFlow()
 
-    protected fun onStartLoading() {
+    fun onStartLoading() {
         _uiState.update {
             it.copy(isLoading = true)
         }
