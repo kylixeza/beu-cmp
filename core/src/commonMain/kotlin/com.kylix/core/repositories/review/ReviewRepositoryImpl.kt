@@ -5,7 +5,9 @@ import com.github.michaelbull.result.Result
 import com.kylix.core.base.BaseNetworkRequest
 import com.kylix.core.data.remote.responses.BaseResponse
 import com.kylix.core.data.remote.responses.review.ReviewRequest
+import com.kylix.core.data.remote.responses.review.ReviewResponse
 import com.kylix.core.data.remote.services.ReviewService
+import com.kylix.core.model.Review
 import com.kylix.core.util.Error
 import com.kylix.core.util.Success
 import io.ktor.client.statement.HttpResponse
@@ -40,6 +42,22 @@ class ReviewRepositoryImpl(
                 return
             }
 
+        }.run()
+    }
+
+    override suspend fun getReview(historyId: String): Result<Success<Review>, Error> {
+        return object : BaseNetworkRequest<Review, ReviewResponse>() {
+            override suspend fun createCall(): HttpResponse {
+                return reviewService.getReview(historyId)
+            }
+
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<ReviewResponse>> {
+                return BaseResponse.serializer(ReviewResponse.serializer())
+            }
+
+            override suspend fun ReviewResponse.mapResponse(): Review {
+                return this.toReview()
+            }
         }.run()
     }
 }

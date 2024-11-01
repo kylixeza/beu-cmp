@@ -3,6 +3,7 @@ package com.kylix.core.data.remote.services
 import io.ktor.client.HttpClient
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.request.get
 import io.ktor.http.Headers
 
 class ReviewService(
@@ -28,5 +29,7 @@ class ReviewService(
             }
         }
     )
+
+    suspend fun getReview(historyId: String) = client.get("histories/$historyId/review")
 
 }

@@ -1,6 +1,7 @@
 package com.kylix.core.repositories.review
 
 import com.github.michaelbull.result.Result
+import com.kylix.core.model.Review
 import com.kylix.core.util.Error
 import com.kylix.core.util.Success
 
@@ -13,4 +14,5 @@ interface ReviewRepository {
         images: List<ByteArray>
     ): Result<Success<Unit>, Error>
 
+    suspend fun getReview(historyId: String): Result<Success<Review>, Error>
 }

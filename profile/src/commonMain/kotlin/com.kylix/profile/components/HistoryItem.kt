@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -50,7 +49,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun HistoryItem(
     history: History,
-    onReviewClick: () -> Unit = {}
+    onGoToReviewPage: () -> Unit = {},
+    onShowReview: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier
@@ -121,7 +121,10 @@ fun HistoryItem(
         ReviewCard(
             modifier = Modifier.padding(horizontal = 24.dp),
             history = history,
-            onReviewClick = onReviewClick
+            onReviewClick = {
+                if (history.isReviewed) onShowReview()
+                else onGoToReviewPage()
+            }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -139,7 +142,7 @@ private fun ReviewCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable(enabled = !history.isReviewed) { onReviewClick() },
+            .clickable { onReviewClick() },
         colors = CardDefaults.cardColors(containerColor = White),
         border = BorderStroke(1.dp, Neutral300),
         shape = RoundedCornerShape(4.dp),

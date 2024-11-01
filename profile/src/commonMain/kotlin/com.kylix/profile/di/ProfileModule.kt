@@ -11,6 +11,6 @@ val profileModule = module {
     factory { ProfileScreenModel(get(), get()) }
     factory { UpdateProfileScreenModel(get()) }
     factory { FavoriteScreenModel(get()) }
-    factory { HistoryScreenModel(get()) }
+    factory { HistoryScreenModel(get(), get()) }
     factory { HelpCenterScreenModel (get()) }
 }
