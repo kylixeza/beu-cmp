@@ -55,10 +55,7 @@ fun<T: HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultContentNegotiation(
 
 fun <T: HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultRetries() {
     install(HttpRequestRetry) {
-        retryOnServerErrors(maxRetries = 5)
+        retryOnExceptionOrServerErrors(maxRetries = 10)
         exponentialDelay()
-        retryIf { httpRequest, httpResponse ->
-            httpResponse.contentLength() == 0L || httpResponse.contentType() == null
-        }
     }
 }
