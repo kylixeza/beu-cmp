@@ -3,6 +3,7 @@ package com.kylix.core.util
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.DEFAULT
@@ -10,8 +11,8 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.bearerAuth
-import io.ktor.client.request.header
 import io.ktor.http.ContentType
+import io.ktor.http.contentLength
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -49,5 +50,15 @@ fun<T: HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultContentNegotiation(
             }
         )
         block()
+    }
+}
+
+fun <T: HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultRetries() {
+    install(HttpRequestRetry) {
+        retryOnServerErrors(maxRetries = 5)
+        exponentialDelay()
+        retryIf { httpRequest, httpResponse ->
+            httpResponse.contentLength() == 0L || httpResponse.contentType() == null
+        }
     }
 }

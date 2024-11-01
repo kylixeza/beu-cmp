@@ -6,6 +6,7 @@ import com.kylix.core.data.local.DataStoreFactory
 import com.kylix.core.util.beuDefaultContentNegotiation
 import com.kylix.core.util.beuDefaultLogging
 import com.kylix.core.util.beuDefaultRequest
+import com.kylix.core.util.beuDefaultRetries
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import kotlinx.coroutines.runBlocking
@@ -46,6 +47,7 @@ actual val networkPlatformModule: Module = module {
             beuDefaultRequest(token = token)
             beuDefaultLogging()
             beuDefaultContentNegotiation()
+            beuDefaultRetries()
         }
     }
 }
