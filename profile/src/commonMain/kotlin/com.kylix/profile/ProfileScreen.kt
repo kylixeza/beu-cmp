@@ -150,7 +150,7 @@ class ProfileScreen: Screen {
                         modifier = Modifier.fillMaxWidth(),
                         onClick = {
                             screenModel.logout(
-                                onLoggedOut = { navigator.replaceAll(loginScreen) }
+                                onLoggedOut = { navigator.parent?.parent?.replaceAll(loginScreen) }
                             )
                         }
                     ) {
