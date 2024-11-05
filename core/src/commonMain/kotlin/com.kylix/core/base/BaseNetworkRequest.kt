@@ -6,8 +6,11 @@ import com.github.michaelbull.result.Result
 import com.kylix.core.data.remote.responses.BaseResponse
 import com.kylix.core.util.Error
 import com.kylix.core.util.Success
+import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.delay
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.json.Json
 
@@ -16,7 +19,7 @@ abstract class BaseNetworkRequest<ResultType, ResponseType> {
     suspend fun run(): Result<Success<ResultType>, Error> {
         preRequest()
         return try {
-            val httpResponse = createCall()
+            val httpResponse = retryOnTimeout { createCall() }
             val responseJson = httpResponse.bodyAsText()
             val baseResponseOf = Json.decodeFromString(deserialize(responseJson), responseJson)
 
@@ -42,4 +45,33 @@ abstract class BaseNetworkRequest<ResultType, ResponseType> {
     protected abstract fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<ResponseType>>
 
     protected open suspend fun saveCallResult(data: ResponseType) { }
+
+    private suspend fun <T> retryOnTimeout(
+        maxRetries: Int = 3,
+        initialDelay: Long = 1000L,
+        block: suspend () -> T
+    ): T {
+        var currentRetry = 0
+        var currentDelay = initialDelay
+
+        while (true) {
+            try {
+                return block()
+            } catch (e: TimeoutCancellationException) {
+                currentRetry++
+                if (currentRetry > maxRetries) {
+                    throw e // Re-throw if max retries exceeded
+                }
+                delay(currentDelay)
+                currentDelay *= 2 // Exponential backoff
+            } catch (e: ConnectTimeoutException) {
+                currentRetry++
+                if (currentRetry > maxRetries) {
+                    throw e
+                }
+                delay(currentDelay)
+                currentDelay *= 2
+            }
+        }
+    }
 }
