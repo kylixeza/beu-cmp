@@ -63,7 +63,7 @@ class HistoryScreen: Screen {
                 items(
                     historyState.histories,
                     key = {
-                        it
+                        it.historyId + it.reviewRating
                     }
                 ) {
                     HistoryItem(
