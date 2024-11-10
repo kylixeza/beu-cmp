@@ -7,6 +7,7 @@ import com.kylix.core.data.remote.responses.BaseResponse
 import com.kylix.core.util.Error
 import com.kylix.core.util.Success
 import io.ktor.client.network.sockets.ConnectTimeoutException
+import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.TimeoutCancellationException
@@ -47,30 +48,23 @@ abstract class BaseNetworkRequest<ResultType, ResponseType> {
     protected open suspend fun saveCallResult(data: ResponseType) { }
 
     private suspend fun <T> retryOnTimeout(
-        maxRetries: Int = 3,
+        maxRetries: Int = 10,
         initialDelay: Long = 1000L,
         block: suspend () -> T
     ): T {
         var currentRetry = 0
-        var currentDelay = initialDelay
 
         while (true) {
             try {
                 return block()
-            } catch (e: TimeoutCancellationException) {
-                currentRetry++
-                if (currentRetry > maxRetries) {
-                    throw e // Re-throw if max retries exceeded
-                }
-                delay(currentDelay)
-                currentDelay *= 2 // Exponential backoff
-            } catch (e: ConnectTimeoutException) {
-                currentRetry++
-                if (currentRetry > maxRetries) {
+            } catch (e: Exception) {
+                if (e is ConnectTimeoutException || e is SocketTimeoutException || e is TimeoutCancellationException) {
+                    currentRetry++
+                    if (currentRetry > maxRetries) throw e
+                    delay(initialDelay)
+                } else {
                     throw e
                 }
-                delay(currentDelay)
-                currentDelay *= 2
             }
         }
     }
