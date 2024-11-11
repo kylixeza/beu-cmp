@@ -79,6 +79,7 @@ class SearchScreen: Screen {
                     key = { it.recipeId }
                 ) { recipe ->
                     RecipeItemVertical(
+                        modifier = Modifier.animateItem(),
                         imageUrl = recipe.image,
                         difficulty = recipe.difficulty,
                         foodName = recipe.name,
