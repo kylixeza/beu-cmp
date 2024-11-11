@@ -27,6 +27,7 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import beukmm.theme.Neutral300
 import beukmm.theme.Primary500
@@ -40,6 +41,7 @@ fun BeuBasicTextField(
     minSize: Dp = Dp.Unspecified,
     maxSize: Dp = Dp.Unspecified,
     label: String = "",
+    labelSize: TextUnit = MaterialTheme.typography.bodyLarge.fontSize,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     enabled: Boolean = true,
@@ -81,7 +83,7 @@ fun BeuBasicTextField(
         cursorBrush = cursorBrush,
         decorationBox = { innerTextField ->
             Row(
-                verticalAlignment = Alignment.Top,
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 if (leadingIcon != null) {
@@ -101,7 +103,7 @@ fun BeuBasicTextField(
                 }
             }
             Row(
-                verticalAlignment = Alignment.Top,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 if (leadingIcon != null) {
                     Box(
@@ -117,7 +119,8 @@ fun BeuBasicTextField(
                             text = label,
                             textAlign = TextAlign.Start,
                             style = MaterialTheme.typography.bodyLarge.copy(
-                                color = Color.LightGray
+                                color = Color.LightGray,
+                                fontSize = labelSize
                             ),
                         )
                     }

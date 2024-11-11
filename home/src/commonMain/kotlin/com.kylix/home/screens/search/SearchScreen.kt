@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import beukmm.base.BaseScreenContent
 import beukmm.components.BeuBasicTextField
 import beukmm.components.RecipeItemVertical
@@ -61,6 +62,7 @@ class SearchScreen: Screen {
                         value = searchState.displayQuery,
                         onValueChange = { screenModel.setQuery(it) },
                         label = "Search recipes by name or ingredients",
+                        labelSize = 14.sp,
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                     )
