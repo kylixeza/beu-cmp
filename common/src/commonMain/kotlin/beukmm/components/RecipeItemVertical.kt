@@ -40,6 +40,8 @@ import beukmm.theme.Primary900
 import beukmm.theme.Success50
 import beukmm.theme.Success900
 import beukmm.theme.White
+import beukmm.util.cardDifficultyColor
+import beukmm.util.textDifficultyColor
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
@@ -55,20 +57,6 @@ fun RecipeItemVertical(
     cookTime: Int,
     onItemClick: () -> Unit = {}
 ) {
-
-    val cardDifficultyColor = when (difficulty) {
-        "Mudah" -> Success50
-        "Menengah" -> Primary50
-        "Sulit" -> Error50
-        else -> Primary50
-    }
-
-    val difficultyColor = when (difficulty) {
-        "Mudah" -> Success900
-        "Menengah" -> Primary900
-        "Sulit" -> Error900
-        else -> Primary900
-    }
 
     val painterResources = asyncPainterResource(data = imageUrl)
 
@@ -114,13 +102,13 @@ fun RecipeItemVertical(
                 Spacer(modifier = Modifier.height(8.dp))
                 Card(
                     shape = RoundedCornerShape(4.dp),
-                    colors = CardDefaults.cardColors(containerColor = cardDifficultyColor),
+                    colors = CardDefaults.cardColors(containerColor = difficulty.cardDifficultyColor()),
                 ) {
                     Text(
                         text = difficulty,
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontSize = 8.sp,
-                            color = difficultyColor
+                            color = difficulty.textDifficultyColor()
                         ),
                         fontSize = 8.sp,
                         modifier = Modifier.padding(horizontal = 2.dp, vertical = 2.dp)
