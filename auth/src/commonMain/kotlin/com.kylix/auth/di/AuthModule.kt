@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val authModule = module {
     factory { LoginScreenModel(get()) }
-    factory { RegisterScreenModel() }
+    factory { RegisterScreenModel(get()) }
 }
