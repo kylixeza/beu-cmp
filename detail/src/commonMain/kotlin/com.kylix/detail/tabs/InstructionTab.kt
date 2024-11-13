@@ -160,7 +160,7 @@ class InstructionTab(
         @Composable
         get() = TabOptions(
             index = 1u,
-            title = "Instruction",
+            title = "Instructions",
             icon = null
         )
 }

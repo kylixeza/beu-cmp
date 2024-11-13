@@ -181,7 +181,7 @@ class ReviewTab(
         @Composable
         get() = TabOptions(
             index = 2u,
-            title = "Review",
+            title = "Reviews",
             icon = null
         )
 }
