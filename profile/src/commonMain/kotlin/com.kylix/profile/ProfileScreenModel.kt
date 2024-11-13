@@ -60,12 +60,12 @@ class ProfileScreenModel(
                         setting = ProfileSetting.RESET_PASSWORD
                     ),
                     Setting(
-                        name = "History",
+                        name = "Histories",
                         icon = Res.drawable.ic_profile_history,
                         setting = ProfileSetting.HISTORY
                     ),
                     Setting(
-                        name = "Favorite",
+                        name = "Favorites",
                         icon = Res.drawable.ic_profile_favorite,
                         setting = ProfileSetting.FAVORITE
                     ),
