@@ -56,7 +56,9 @@ class AuthRepositoryImpl(
 
             override suspend fun TokenResponse.mapResponse() {}
 
-            override suspend fun saveCallResult(data: TokenResponse) {}
+            override suspend fun saveCallResult(data: TokenResponse) {
+                dataStore.saveToken(data.token)
+            }
 
         }.run()
     }
