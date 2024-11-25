@@ -1,6 +1,7 @@
 package com.kylix.profile.screens.history
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.components.BaseAppBar
+import beukmm.components.EmptyListScreen
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
 import cafe.adriel.voyager.core.registry.ScreenRegistry
@@ -38,7 +40,6 @@ class HistoryScreen: Screen {
         val historyState by screenModel.historyState.collectAsState()
         val uiState by screenModel.uiState.collectAsState()
 
-        val coroutineScope = rememberCoroutineScope()
         val bottomSheetState = rememberModalBottomSheetState()
 
         val navigator = LocalNavigator.currentOrThrow
@@ -56,6 +57,14 @@ class HistoryScreen: Screen {
             uiState = uiState,
             onLoadingDialogDismissRequest = { screenModel.onFinishLoading() }
         ) { innerPadding ->
+
+            if (historyState.histories.isEmpty()) {
+                EmptyListScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    message = "Why don't you try some of our recipes? 🤔"
+                )
+            }
+
             LazyColumn(
                 modifier = Modifier.fillMaxWidth().padding(innerPadding),
                 contentPadding = PaddingValues(vertical = 12.dp)

@@ -1,6 +1,7 @@
 package com.kylix.profile.screens.favorite
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.components.BaseAppBar
+import beukmm.components.EmptyListScreen
 import beukmm.components.RecipeItemVertical
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
@@ -48,6 +50,14 @@ class FavoriteScreen: Screen {
             uiState = uiState,
             onLoadingDialogDismissRequest = { screenModel.onFinishLoading() }
         ) { innerPadding ->
+
+            if (favoriteState.favorites.isEmpty()) {
+                EmptyListScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    message = "Start loving one of our recipes to see them here! 😍"
+                )
+            }
+
             LazyColumn(
                 modifier = Modifier.fillMaxWidth().padding(innerPadding),
                 contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)

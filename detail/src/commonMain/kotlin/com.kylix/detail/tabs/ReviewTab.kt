@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,6 +32,7 @@ import beukmm.common.generated.resources.Res
 import beukmm.common.generated.resources.ic_star
 import beukmm.common.generated.resources.ic_unstar
 import beukmm.common.generated.resources.ilu_default_profile_picture
+import beukmm.components.EmptyListScreen
 import beukmm.components.NetworkFlexboxImages
 import beukmm.theme.Primary700
 import beukmm.util.customKamelConfig
@@ -48,6 +50,13 @@ class ReviewTab(
 
     @Composable
     override fun Content() {
+
+        if (detailState.recipe?.reviews.isNullOrEmpty()) {
+            EmptyListScreen(
+                modifier = Modifier.fillMaxSize(),
+                message = "No reviews yet 😥"
+            )
+        }
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
