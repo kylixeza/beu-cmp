@@ -1,5 +1,6 @@
 package com.kylix.profile
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +26,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
+import beukmm.common.generated.resources.Res
+import beukmm.common.generated.resources.ilu_default_profile_picture
 import beukmm.components.SecondaryAppBar
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
@@ -48,6 +51,7 @@ import com.multiplatform.lifecycle.LocalLifecycleTracker
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.kamel.image.config.LocalKamelConfig
+import org.jetbrains.compose.resources.painterResource
 
 class ProfileScreen: Screen {
 
@@ -108,7 +112,15 @@ class ProfileScreen: Screen {
                                 resource = painter,
                                 contentDescription = "Profile Picture",
                                 contentScale = ContentScale.Crop,
-                                modifier = Modifier.size(100.dp).clip(CircleShape)
+                                modifier = Modifier.size(100.dp).clip(CircleShape),
+                                onFailure = {
+                                    Image(
+                                        painter = painterResource(Res.drawable.ilu_default_profile_picture),
+                                        contentDescription = "Reviewer image",
+                                        modifier = Modifier.size(100.dp).clip(CircleShape),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
                             )
                         }
                         Spacer(modifier = Modifier.height(8.dp))
