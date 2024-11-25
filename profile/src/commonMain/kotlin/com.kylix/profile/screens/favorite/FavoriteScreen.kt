@@ -42,7 +42,7 @@ class FavoriteScreen: Screen {
         BaseScreenContent(
             topBar = {
                 BaseAppBar(
-                    title = "Favorite",
+                    title = "Favorites",
                     onLeftIconClick = { navigator.pop() },
                     rightIcon = null
                 )

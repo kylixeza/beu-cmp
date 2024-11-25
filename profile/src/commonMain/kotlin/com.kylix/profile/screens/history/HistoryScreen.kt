@@ -48,7 +48,7 @@ class HistoryScreen: Screen {
         BaseScreenContent(
             topBar = {
                 BaseAppBar(
-                    title = "History",
+                    title = "Histories",
                     onLeftIconClick = { navigator.pop() },
                     rightIcon = null
                 )
