@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Beu" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <!-- Customize your app theme here -->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>
