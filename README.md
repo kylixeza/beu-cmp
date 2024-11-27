@@ -19,6 +19,10 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
 
+# Ecosystem
+1. Backend : https://github.com/kylixeza/beu-remaster-backend
+2. Notebook: https://github.com/kylixeza/beu-remaster-ml
+
 # Screenshots
 <p>
 <img width=200 src="https://raw.githubusercontent.com/kylixeza/beu-cmp/refs/heads/development/screenshots/1_splash.jpeg" >
@@ -46,7 +50,6 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 </p>
 
 # Note
-
 The classification feature only works on android, while on ios it still doesn't because the developer doesn't have a real device for testing.
 
 # Contribution
