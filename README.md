@@ -50,7 +50,8 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 </p>
 
 # Note
-The classification feature only works on android, while on ios it still doesn't because the developer doesn't have a real device for testing.
+1. The classification feature only works on android, while on ios it still doesn't because the developer doesn't have a real device for testing.
+2. You can create an account to use the app and it's free (no API Key)
 
 # Contribution
 For anyone who wants to contribute can send a pull request
