@@ -153,7 +153,7 @@ class CameraScreen: Screen {
         if (hasCameraPermission) {
             screenModel.grantCameraPermission()
         } else {
-            permissions.RequestStoragePermission(
+            permissions.RequestCameraPermission(
                 onGranted = { screenModel.grantCameraPermission() },
                 onDenied = { }
             )
