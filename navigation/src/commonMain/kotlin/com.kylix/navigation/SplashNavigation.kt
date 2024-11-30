@@ -30,6 +30,3 @@ fun AppNavigator() {
         )
     }
 }
-
-//test the review use this
-//HISTORY-tmPSWr9LcO4D1m7pLWk3t
