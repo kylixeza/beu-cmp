@@ -1,0 +1,26 @@
+PODS:
+  - camera (1.0):
+    - TensorFlowLiteC
+  - TensorFlowLiteC (2.14.0):
+    - TensorFlowLiteC/Core (= 2.14.0)
+  - TensorFlowLiteC/Core (2.14.0)
+
+DEPENDENCIES:
+  - camera (from `../camera`)
+  - TensorFlowLiteC (~> 2.14.0)
+
+SPEC REPOS:
+  trunk:
+    - TensorFlowLiteC
+
+EXTERNAL SOURCES:
+  camera:
+    :path: "../camera"
+
+SPEC CHECKSUMS:
+  camera: e93481f97bf9bdfe901ce66c3c93a10d40b5c7fa
+  TensorFlowLiteC: a836de9b6e6018665ccc349538bdd2c3b80dd7a5
+
+PODFILE CHECKSUM: 528f434a278fa56d76f5881ae86dce9285c4e2cc
+
+COCOAPODS: 1.16.2
