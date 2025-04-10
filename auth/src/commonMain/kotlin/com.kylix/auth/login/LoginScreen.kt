@@ -34,18 +34,16 @@ import beukmm.navigator.SharedScreen
 import beukmm.theme.Black
 import beukmm.theme.Primary500
 import beukmm.theme.White
-import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.core.screen.ScreenKey
-import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Eye
 import compose.icons.feathericons.EyeOff
 
-class LoginScreen: Screen {
+class LoginScreen: Screen, ScreenDisposable {
 
     @Composable
     override fun Content() {
