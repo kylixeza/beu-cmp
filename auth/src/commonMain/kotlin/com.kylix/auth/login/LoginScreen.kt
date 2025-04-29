@@ -141,7 +141,7 @@ class LoginScreen: Screen, ScreenDisposable {
 
         LaunchedEffect(uiState.isSuccess) {
             if (uiState.isSuccess) {
-                navigator.replace(mainScreen)
+                navigator.replaceAll(mainScreen)
             }
         }
     }
