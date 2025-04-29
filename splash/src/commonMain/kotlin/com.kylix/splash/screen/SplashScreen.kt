@@ -13,6 +13,7 @@ import beukmm.common.generated.resources.beu_icon
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
 import beukmm.theme.BeuTheme
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -20,7 +21,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 
-class SplashScreen : Screen {
+class SplashScreen : Screen, ScreenDisposable {
 
     @Composable
     override fun Content() {

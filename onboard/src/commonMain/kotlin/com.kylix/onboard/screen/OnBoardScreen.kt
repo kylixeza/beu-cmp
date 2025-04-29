@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import beukmm.components.LoadingDialog
 import beukmm.navigator.SharedScreen
 import beukmm.theme.Secondary500
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
@@ -23,7 +24,7 @@ import com.kylix.onboard.components.FinishButton
 import com.kylix.onboard.components.PageScreen
 import com.kylix.onboard.components.PagerIndicator
 
-class OnBoardScreen: Screen {
+class OnBoardScreen: Screen, ScreenDisposable {
 
     @OptIn(ExperimentalFoundationApi::class)
     @Composable

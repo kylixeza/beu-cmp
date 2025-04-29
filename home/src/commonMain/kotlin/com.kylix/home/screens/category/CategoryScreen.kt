@@ -17,6 +17,7 @@ import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -25,7 +26,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 class CategoryScreen(
     private val categoryId: String,
     private val categoryName: String,
-): Screen {
+): Screen, ScreenDisposable {
 
     @OptIn(ExperimentalVoyagerApi::class)
     @Composable

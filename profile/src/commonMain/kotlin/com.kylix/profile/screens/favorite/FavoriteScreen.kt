@@ -18,6 +18,7 @@ import beukmm.components.EmptyListScreen
 import beukmm.components.RecipeItemVertical
 import beukmm.di.koinScreenModel
 import beukmm.navigator.SharedScreen
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -26,7 +27,7 @@ import com.multiplatform.lifecycle.LifecycleEvent
 import com.multiplatform.lifecycle.LifecycleObserver
 import com.multiplatform.lifecycle.LocalLifecycleTracker
 
-class FavoriteScreen: Screen {
+class FavoriteScreen: Screen, ScreenDisposable {
 
     @Composable
     override fun Content() {

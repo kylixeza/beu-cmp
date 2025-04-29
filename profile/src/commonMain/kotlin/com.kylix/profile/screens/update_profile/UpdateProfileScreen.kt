@@ -31,6 +31,7 @@ import beukmm.di.koinScreenModel
 import beukmm.profile.generated.resources.Res
 import beukmm.profile.generated.resources.ic_edit
 import beukmm.theme.White
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -43,7 +44,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.decodeToImageBitmap
 import org.jetbrains.compose.resources.painterResource
 
-class UpdateProfileScreen: Screen {
+class UpdateProfileScreen: Screen, ScreenDisposable {
 
     @OptIn(ExperimentalResourceApi::class)
     @Composable

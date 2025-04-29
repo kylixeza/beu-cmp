@@ -22,12 +22,13 @@ import beukmm.components.SecondaryAppBar
 import beukmm.di.koinScreenModel
 import beukmm.theme.Primary500
 import beukmm.theme.White
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import rememberStackedSnackbarHostState
 
-class HelpCenterScreen: Screen {
+class HelpCenterScreen: Screen, ScreenDisposable {
 
     @Composable
     override fun Content() {

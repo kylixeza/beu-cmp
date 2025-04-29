@@ -30,6 +30,7 @@ import beukmm.components.BeuBasicTextField
 import beukmm.components.LocalFlexboxImages
 import beukmm.theme.Primary500
 import beukmm.theme.White
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -42,7 +43,7 @@ import org.jetbrains.compose.resources.painterResource
 
 class ReviewScreen(
     private val historyId: String,
-) : Screen {
+) : Screen, ScreenDisposable {
 
     @Composable
     override fun Content() {

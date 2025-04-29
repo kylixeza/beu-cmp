@@ -30,6 +30,7 @@ import beukmm.theme.Error500
 import beukmm.theme.White
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -42,7 +43,7 @@ import com.kylix.detail.components.VideoPlayer
 
 class DetailScreen(
     private val recipeId: String
-): Screen {
+): Screen, ScreenDisposable {
 
     @OptIn(ExperimentalVoyagerApi::class)
     @Composable
