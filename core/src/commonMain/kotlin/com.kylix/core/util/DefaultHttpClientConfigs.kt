@@ -10,19 +10,16 @@ import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.request.bearerAuth
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 fun<T : HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultRequest(
-    token: String,
     block: DefaultRequest.DefaultRequestBuilder.() -> Unit = {}
 ) {
     defaultRequest {
         url("https://cookwithbeu.web.id/api/")
-        bearerAuth(token)
         contentType(ContentType.Application.Json)
         block()
     }

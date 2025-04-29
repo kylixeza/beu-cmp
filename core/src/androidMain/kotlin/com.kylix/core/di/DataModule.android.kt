@@ -9,6 +9,9 @@ import com.kylix.core.util.beuDefaultRequest
 import com.kylix.core.util.beuDefaultRetries
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.HttpSend
+import io.ktor.client.plugins.plugin
+import io.ktor.client.request.bearerAuth
 import kotlinx.coroutines.runBlocking
 import okhttp3.Cache
 import org.koin.core.module.Module
@@ -29,12 +32,10 @@ actual val dataStorePlatformModule: Module = module {
 
 }
 actual val networkPlatformModule: Module = module {
-    factory {
-        val dataStore = get<BeuDataStore>()
-        val token = runBlocking { dataStore.getToken() }
+    single {
         val context = get<Context>()
 
-        HttpClient(OkHttp) {
+        val client = HttpClient(OkHttp) {
             engine {
                 config {
                     connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
@@ -44,10 +45,18 @@ actual val networkPlatformModule: Module = module {
                         )
                 }
             }
-            beuDefaultRequest(token = token)
+            beuDefaultRequest()
             beuDefaultLogging()
             beuDefaultContentNegotiation()
             beuDefaultRetries()
         }
+
+       client.plugin(HttpSend).intercept { request ->
+           val token = runBlocking { get<BeuDataStore>().getToken() }
+           request.bearerAuth(token)
+           execute(request)
+        }
+
+        client
     }
 }

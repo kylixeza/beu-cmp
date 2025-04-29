@@ -8,6 +8,9 @@ import com.kylix.core.util.beuDefaultRequest
 import com.kylix.core.util.beuDefaultRetries
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.darwin.Darwin
+import io.ktor.client.plugins.HttpSend
+import io.ktor.client.plugins.plugin
+import io.ktor.client.request.bearerAuth
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.runBlocking
 import org.koin.core.module.Module
@@ -37,12 +40,8 @@ actual val dataStorePlatformModule: Module = module {
     }
 }
 actual val networkPlatformModule: Module = module {
-    factory {
-
-        val dataStore = get<BeuDataStore>()
-        val token = runBlocking { dataStore.getToken() }
-
-        HttpClient(Darwin) {
+    single {
+        val client = HttpClient(Darwin) {
             engine {
                 configureRequest {
                     setAllowsCellularAccess(true)
@@ -51,10 +50,17 @@ actual val networkPlatformModule: Module = module {
                     setAllowsExpensiveNetworkAccess(true)
                 }
             }
-            beuDefaultRequest(token = token)
+            beuDefaultRequest()
             beuDefaultLogging()
             beuDefaultContentNegotiation()
             beuDefaultRetries()
         }
+        client.plugin(HttpSend).intercept { request ->
+            val token = runBlocking { get<BeuDataStore>().getToken() }
+            request.bearerAuth(token)
+            execute(request)
+        }
+
+        client
     }
 }
