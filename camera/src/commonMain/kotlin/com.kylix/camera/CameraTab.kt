@@ -19,16 +19,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.camera.generated.resources.Res
 import beukmm.camera.generated.resources.ic_camera_capture
-import beukmm.di.koinScreenModel
+import beukmm.di.koinNavigatorScreenModel
 import beukmm.navigator.SharedScreen
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.kashif.cameraK.controller.CameraController
 import com.kashif.cameraK.enums.CameraLens
 import com.kashif.cameraK.enums.Directory
@@ -39,17 +41,21 @@ import com.kashif.cameraK.result.ImageCaptureResult
 import com.kashif.cameraK.ui.CameraPreview
 import com.kylix.camera.components.PredictionResultBottomSheet
 import com.kylix.camera.tflite.TFLiteHelper
+import compose.icons.feathericons.Camera
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 import rememberStackedSnackbarHostState
 
-class CameraScreen: Screen {
+object CameraTab: Tab {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+        val navigatorParent = navigator.parent ?: return
+
         val tfLiteHelper = koinInject<TFLiteHelper>()
         var cameraController by remember { mutableStateOf<CameraController?>(null) }
 
@@ -57,11 +63,9 @@ class CameraScreen: Screen {
         val bottomSheetState = rememberModalBottomSheetState()
         val stackedSnackbarState = rememberStackedSnackbarHostState()
 
-        val screenModel = koinScreenModel<CameraScreenModel>()
+        val screenModel = navigatorParent.koinNavigatorScreenModel<CameraScreenModel>()
         val cameraState by screenModel.cameraState.collectAsState()
         val uiState by screenModel.uiState.collectAsState()
-
-        val navigator = LocalNavigator.currentOrThrow
 
         RequestPermissions(screenModel)
 
@@ -108,7 +112,7 @@ class CameraScreen: Screen {
                 recipes = cameraState.recipes,
                 sheetState = bottomSheetState,
                 onItemSelected = { recipeId ->
-                    navigator.push(ScreenRegistry.get(SharedScreen.Detail(recipeId)))
+                    navigatorParent.push(ScreenRegistry.get(SharedScreen.Detail(recipeId)))
                 },
                 onDismissRequest = { screenModel.hideBottomSheet() }
             )
@@ -168,4 +172,18 @@ class CameraScreen: Screen {
             )
         }
     }
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val icon = rememberVectorPainter(image = compose.icons.FeatherIcons.Camera)
+
+            return remember {
+                TabOptions(
+                    index = 1u,
+                    icon = icon,
+                    title = "Camera"
+                )
+            }
+        }
 }

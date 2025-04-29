@@ -14,42 +14,44 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.components.RecipeItemHorizontal
-import beukmm.di.koinScreenModel
+import beukmm.di.koinNavigatorScreenModel
 import beukmm.navigator.SharedScreen
 import beukmm.theme.Primary500
-import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.kylix.home.components.CategoryItem
 import com.kylix.home.components.HomeAppbar
 import com.kylix.home.screens.category.CategoryScreen
 import com.kylix.home.screens.search.SearchScreen
+import compose.icons.feathericons.Home
 
-class HomeScreen : Screen {
+object HomeTab : Tab {
 
-    @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
-        val screenModel = koinScreenModel<HomeScreenModel>()
+        val navigator = LocalNavigator.currentOrThrow
+        val navigatorParent = navigator.parent ?: return
+
+        val screenModel = navigatorParent.koinNavigatorScreenModel<HomeScreenModel>()
         val uiState by screenModel.uiState.collectAsState()
         val homeState by screenModel.homeState.collectAsState()
-
-        val navigator = LocalNavigator.currentOrThrow
 
         BaseScreenContent(
             modifier = Modifier.fillMaxWidth(),
             topBar = {
                 HomeAppbar(
                     greeting = homeState.greet,
-                    onSearchClick = { navigator.push(SearchScreen()) }
+                    onSearchClick = { navigatorParent.push(SearchScreen()) }
                 )
             },
             uiState = uiState,
@@ -79,7 +81,7 @@ class HomeScreen : Screen {
                             CategoryItem(
                                 category = it,
                                 onCategorySelected = { id, name ->
-                                    navigator.push(
+                                    navigatorParent.push(
                                         CategoryScreen(
                                             categoryId = id,
                                             categoryName = name
@@ -126,7 +128,7 @@ class HomeScreen : Screen {
                                 rating = recipe.rating,
                                 cookTime = recipe.estimationTime,
                                 onItemClick = {
-                                    navigator.push(
+                                    navigatorParent.push(
                                        ScreenRegistry.get(
                                            SharedScreen.Detail(recipe.recipeId)
                                        )
@@ -141,4 +143,18 @@ class HomeScreen : Screen {
             }
         }
     }
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val icon = rememberVectorPainter(image = compose.icons.FeatherIcons.Home)
+
+            return remember {
+                TabOptions(
+                    index = 0u,
+                    icon = icon,
+                    title = "Home"
+                )
+            }
+        }
 }

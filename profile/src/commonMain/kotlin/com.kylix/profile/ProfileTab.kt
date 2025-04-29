@@ -20,23 +20,27 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.common.generated.resources.Res
 import beukmm.common.generated.resources.ilu_default_profile_picture
 import beukmm.components.SecondaryAppBar
-import beukmm.di.koinScreenModel
+import beukmm.di.koinNavigatorScreenModel
 import beukmm.navigator.SharedScreen
 import beukmm.theme.White
 import beukmm.util.customKamelConfig
+import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.registry.rememberScreen
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.kylix.profile.components.ItemSetting
 import com.kylix.profile.model.ProfileSetting
 import com.kylix.profile.screens.favorite.FavoriteScreen
@@ -48,23 +52,24 @@ import com.kylix.profile.screens.update_profile.UpdateProfileScreen
 import com.multiplatform.lifecycle.LifecycleEvent
 import com.multiplatform.lifecycle.LifecycleObserver
 import com.multiplatform.lifecycle.LocalLifecycleTracker
+import compose.icons.feathericons.User
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.kamel.image.config.LocalKamelConfig
 import org.jetbrains.compose.resources.painterResource
 
-class ProfileScreen: Screen {
+object ProfileTab: Tab {
 
     @Composable
     override fun Content() {
-
-        val screenModel = koinScreenModel<ProfileScreenModel>()
-        val profileState by screenModel.profileState.collectAsState()
-        val uiState by screenModel.uiState.collectAsState()
-
         val navigator = LocalNavigator.currentOrThrow
+        val navigatorParent = navigator.parent ?: return
         val resetPasswordScreen = rememberScreen(SharedScreen.ResetPassword)
         val loginScreen = rememberScreen(SharedScreen.Login)
+
+        val screenModel = navigatorParent.koinNavigatorScreenModel<ProfileScreenModel>()
+        val profileState by screenModel.profileState.collectAsState()
+        val uiState by screenModel.uiState.collectAsState()
 
         val lifecycleTracker = LocalLifecycleTracker.current
 
@@ -143,13 +148,13 @@ class ProfileScreen: Screen {
                             setting = setting,
                             onClick = {
                                 when(setting.setting) {
-                                    ProfileSetting.UPDATE_PROFILE -> { navigator.push(UpdateProfileScreen()) }
-                                    ProfileSetting.RESET_PASSWORD -> { navigator.push(resetPasswordScreen) }
-                                    ProfileSetting.HISTORY -> navigator.push(HistoryScreen())
-                                    ProfileSetting.FAVORITE -> { navigator.push(FavoriteScreen()) }
-                                    ProfileSetting.PRIVACY_POLICY -> navigator.push(PrivacyPolicyScreen())
-                                    ProfileSetting.TERMS_AND_CONDITIONS -> navigator.push(TermsConditionsScreen())
-                                    ProfileSetting.HELP -> navigator.push(HelpCenterScreen())
+                                    ProfileSetting.UPDATE_PROFILE -> { navigatorParent.push(UpdateProfileScreen()) }
+                                    ProfileSetting.RESET_PASSWORD -> { navigatorParent.push(resetPasswordScreen) }
+                                    ProfileSetting.HISTORY -> navigatorParent.push(HistoryScreen())
+                                    ProfileSetting.FAVORITE -> { navigatorParent.push(FavoriteScreen()) }
+                                    ProfileSetting.PRIVACY_POLICY -> navigatorParent.push(PrivacyPolicyScreen())
+                                    ProfileSetting.TERMS_AND_CONDITIONS -> navigatorParent.push(TermsConditionsScreen())
+                                    ProfileSetting.HELP -> navigatorParent.push(HelpCenterScreen())
                                 }
                             }
                         )
@@ -162,7 +167,9 @@ class ProfileScreen: Screen {
                         modifier = Modifier.fillMaxWidth(),
                         onClick = {
                             screenModel.logout(
-                                onLoggedOut = { navigator.parent?.parent?.replaceAll(loginScreen) }
+                                onLoggedOut = {
+                                    navigatorParent.replaceAll(loginScreen)
+                                }
                             )
                         }
                     ) {
@@ -176,6 +183,19 @@ class ProfileScreen: Screen {
                 }
             }
         }
-
     }
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val icon = rememberVectorPainter(image = compose.icons.FeatherIcons.User)
+
+            return remember {
+                TabOptions(
+                    index = 2u,
+                    icon = icon,
+                    title = "Profile"
+                )
+            }
+        }
 }

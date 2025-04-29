@@ -1,81 +1,44 @@
 package com.kylix.main
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import beukmm.base.BaseScreenContent
 import beukmm.theme.White
+import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
-import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.kylix.camera.CameraTab
+import com.kylix.home.HomeTab
 import com.kylix.main.components.TabNavigationItem
-import com.kylix.main.tabs.CameraTab
-import com.kylix.main.tabs.HomeTab
-import com.kylix.main.tabs.ProfileTab
+import com.kylix.profile.ProfileTab
 
-class MainScreen : Screen {
+class MainScreen : Screen, ScreenDisposable {
 
     @Composable
     override fun Content() {
 
-        var isVisible by remember { mutableStateOf(true) }
-
-        val homeTab = remember { HomeTab(
-            onNavigator = {
-                isVisible = it
-            }
-        ) }
-        val cameraTab = remember { CameraTab(
-            onNavigator = {
-                isVisible = it
-            }
-        ) }
-        val profileTab = remember { ProfileTab(
-            onNavigator = {
-                isVisible = it
-            }
-        ) }
-
         TabNavigator(
-            homeTab,
-            tabDisposable = {
-                TabDisposable(
-                    navigator = it,
-                    tabs = listOf(homeTab, cameraTab, profileTab)
-                )
-            }
+            HomeTab,
+            disposeNestedNavigators = true,
         ) {
             BaseScreenContent(
                 bottomBar = {
-                    AnimatedVisibility(
-                        visible = isVisible,
-                        enter = slideInVertically(initialOffsetY = { (it * 1.2).toInt() }),
-                        exit = slideOutVertically(targetOffsetY = { (it * 1.2).toInt() })
+                    NavigationBar(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .size(80.dp),
+                        tonalElevation = 8.dp,
+                        containerColor = White
                     ) {
-                        NavigationBar(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .size(80.dp),
-                            tonalElevation = 8.dp,
-                            containerColor = White
-                        ) {
-                            TabNavigationItem(homeTab)
-                            TabNavigationItem(cameraTab)
-                            TabNavigationItem(profileTab)
-                        }
+                        TabNavigationItem(HomeTab)
+                        TabNavigationItem(CameraTab)
+                        TabNavigationItem(ProfileTab)
                     }
-
                 }
             ) {
                 CurrentTab()
