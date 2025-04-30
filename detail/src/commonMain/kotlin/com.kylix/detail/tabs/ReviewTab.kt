@@ -92,7 +92,7 @@ class ReviewTab(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.Top
             ) {
                 CompositionLocalProvider(LocalKamelConfig provides customKamelConfig) {
                     KamelImage(
