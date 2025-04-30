@@ -1,6 +1,7 @@
 package com.kylix.camera
 
 import beukmm.base.BaseScreenModel
+import beukmm.util.compressForClassify
 import com.kylix.core.model.RecipeList
 import com.kylix.core.repositories.recipe.RecipeRepository
 import com.kylix.core.util.foldResult
@@ -41,28 +42,21 @@ class CameraScreenModel(
         }
     }
 
-    fun setPredictionResult(predictionResult: String) {
-        cameraState.update {
-            it.copy(predictionResult = predictionResult)
-        }
-    }
-
-    fun showBottomSheet() {
-        cameraState.update { it.copy(showBottomSheet = true) }
-    }
-
     fun hideBottomSheet() {
         cameraState.update { it.copy(showBottomSheet = false) }
     }
 
-    fun getRelatedRecipes() {
+    fun classifyImage() {
         onSuspendProcess {
-            val query = cameraState.value.predictionResult
-            val response = repository.getRelatedPredictionRecipes(query)
+            val response = repository.classifyImage(image = cameraState.value.imageResult.compressForClassify())
             response.foldResult(
                 onSuccess = { result ->
                     cameraState.update {
-                        it.copy(recipes = result)
+                        it.copy(
+                            predictionResult = result.classifiedImage,
+                            recipes = result.relatedRecipes,
+                            showBottomSheet = true
+                        )
                     }
                 },
                 onError = {

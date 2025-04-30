@@ -38,8 +38,8 @@ actual val networkPlatformModule: Module = module {
         val client = HttpClient(OkHttp) {
             engine {
                 config {
-                    connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
-                        .readTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
+                    connectTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
+                        .readTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
                         .cache(
                             Cache(context.cacheDir, 10 * 1024 * 1024)
                         )

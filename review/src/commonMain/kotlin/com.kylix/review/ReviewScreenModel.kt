@@ -2,7 +2,7 @@ package com.kylix.review
 
 import androidx.compose.ui.graphics.ImageBitmap
 import beukmm.base.BaseScreenModel
-import beukmm.util.toByteArray
+import beukmm.util.toJPGByteArray
 import cafe.adriel.voyager.core.model.screenModelScope
 import co.touchlab.kermit.Logger
 import com.kylix.core.repositories.review.ReviewRepository
@@ -56,8 +56,8 @@ class ReviewScreenModel(
         screenModelScope.launch(Dispatchers.IO) {
             onStartLoading()
 
-            val imagesByteArray = async(Dispatchers.Main) {
-                reviewState.value.images.map { it.toByteArray() }
+            val imagesByteArray = async(Dispatchers.IO) {
+                reviewState.value.images.map { it.toJPGByteArray() }
             }.await()
 
             repository.postReview(

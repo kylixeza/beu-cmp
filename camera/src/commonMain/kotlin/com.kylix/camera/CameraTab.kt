@@ -120,14 +120,7 @@ object CameraTab: Tab {
 
         LaunchedEffect(cameraState.imageResult) {
             if (cameraState.imageResult.isNotEmpty()) {
-                coroutineScope.launch {
-                    val predictionResult = tfLiteHelper.classifyImage(cameraState.imageResult)
-                    screenModel.setPredictionResult(predictionResult)
-                    delay(1000)
-
-                    screenModel.showBottomSheet()
-                    screenModel.getRelatedRecipes()
-                }
+                screenModel.classifyImage()
             }
         }
     }

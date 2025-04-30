@@ -45,7 +45,7 @@ actual val networkPlatformModule: Module = module {
             engine {
                 configureRequest {
                     setAllowsCellularAccess(true)
-                    setTimeoutInterval(10.0)
+                    setTimeoutInterval(20.0)
                     setAllowsConstrainedNetworkAccess(true)
                     setAllowsExpensiveNetworkAccess(true)
                 }

@@ -3,12 +3,14 @@ package com.kylix.core.repositories.recipe
 import com.github.michaelbull.result.Result
 import com.kylix.core.base.BaseNetworkRequest
 import com.kylix.core.data.remote.responses.BaseResponse
+import com.kylix.core.data.remote.responses.classification.ClassificationResultResponse
 import com.kylix.core.data.remote.responses.recipe.CategoryResponse
 import com.kylix.core.data.remote.responses.recipe.HomeRecipeResponse
 import com.kylix.core.data.remote.responses.recipe.RecipeDetailResponse
 import com.kylix.core.data.remote.responses.recipe.RecipeListResponse
 import com.kylix.core.data.remote.services.RecipeService
 import com.kylix.core.model.Category
+import com.kylix.core.model.ClassificationResult
 import com.kylix.core.model.HomeRecipe
 import com.kylix.core.model.RecipeDetail
 import com.kylix.core.model.RecipeList
@@ -104,18 +106,18 @@ class RecipeRepositoryImpl(
         }.run()
     }
 
-    override suspend fun getRelatedPredictionRecipes(query: String): Result<Success<List<RecipeList>>, Error> {
-        return object : BaseNetworkRequest<List<RecipeList>, List<RecipeListResponse>>() {
+    override suspend fun classifyImage(image: ByteArray): Result<Success<ClassificationResult>, Error> {
+        return object : BaseNetworkRequest<ClassificationResult, ClassificationResultResponse>() {
             override suspend fun createCall(): HttpResponse {
-                return recipeService.getRelatedPredictionRecipes(query)
+                return recipeService.classifyImage(image)
             }
 
-            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<List<RecipeListResponse>>> {
-                return BaseResponse.serializer(ListSerializer(RecipeListResponse.serializer()))
+            override fun deserialize(responseJson: String): DeserializationStrategy<BaseResponse<ClassificationResultResponse>> {
+                return BaseResponse.serializer(ClassificationResultResponse.serializer())
             }
 
-            override suspend fun List<RecipeListResponse>.mapResponse(): List<RecipeList> {
-                return map { it.toRecipeList() }
+            override suspend fun ClassificationResultResponse.mapResponse(): ClassificationResult {
+                return this.toClassificationResult()
             }
 
         }.run()

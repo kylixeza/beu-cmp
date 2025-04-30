@@ -2,6 +2,7 @@ package com.kylix.core.repositories.recipe
 
 import com.github.michaelbull.result.Result
 import com.kylix.core.model.Category
+import com.kylix.core.model.ClassificationResult
 import com.kylix.core.model.HomeRecipe
 import com.kylix.core.model.RecipeDetail
 import com.kylix.core.model.RecipeList
@@ -15,5 +16,5 @@ interface RecipeRepository {
     suspend fun getRecipeDetail(recipeId: String): Result<Success<RecipeDetail>, Error>
     suspend fun searchRecipes(query: String): Result<Success<List<RecipeList>>, Error>
     suspend fun getRecipesByCategory(categoryId: String): Result<Success<List<RecipeList>>, Error>
-    suspend fun getRelatedPredictionRecipes(query: String): Result<Success<List<RecipeList>>, Error>
+    suspend fun classifyImage(image: ByteArray): Result<Success<ClassificationResult>, Error>
 }

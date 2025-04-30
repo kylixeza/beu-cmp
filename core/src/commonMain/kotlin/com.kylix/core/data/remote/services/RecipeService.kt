@@ -1,7 +1,10 @@
 package com.kylix.core.data.remote.services
 
 import io.ktor.client.HttpClient
+import io.ktor.client.request.forms.formData
+import io.ktor.client.request.forms.submitFormWithBinaryData
 import io.ktor.client.request.get
+import io.ktor.http.Headers
 
 class RecipeService(
     private val client: HttpClient,
@@ -17,5 +20,13 @@ class RecipeService(
 
     suspend fun getRecipesByCategory(categoryId: String) = client.get("recipes/categories/$categoryId")
 
-    suspend fun getRelatedPredictionRecipes(query: String) = client.get("prediction?query=$query")
+    suspend fun classifyImage(image: ByteArray) = client.submitFormWithBinaryData(
+        url = "classify",
+        formData = formData {
+            append("image", image, Headers.build {
+                append("Content-Type", "image/jpeg")
+                append("Content-Disposition", "form-data; name=\"image\"; filename=\"image.jpg\"")
+            })
+        }
+    )
 }
