@@ -59,7 +59,7 @@ class ReviewTab(
         }
 
         LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             items(
@@ -92,7 +92,7 @@ class ReviewTab(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.Top
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 CompositionLocalProvider(LocalKamelConfig provides customKamelConfig) {
                     KamelImage(
