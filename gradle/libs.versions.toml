@@ -1,6 +1,7 @@
 [versions]
 agp = "8.2.2"
 cocapods = "1.0"
+buildKonfig = "0.17.1"
 
 android-compileSdk = "34"
 android-minSdk = "24"
@@ -41,6 +42,7 @@ webview = "1.9.20"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-junit" }
@@ -140,6 +142,9 @@ lifecycle-tracker = { module = "io.github.kevinnzou:compose-multiplatform-lifecy
 #WebView
 webview = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "webview" }
 
+#Build Konfig
+buildKonfig = { group = "com.codingfeline.buildkonfig", name = "buildkonfig-gradle-plugin", version.ref = "buildKonfig" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -148,6 +153,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-screen-model", "voyger-transitions", "voyager-koin", "voyager-tab"]

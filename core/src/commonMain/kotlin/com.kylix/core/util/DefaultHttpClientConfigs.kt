@@ -1,5 +1,6 @@
 package com.kylix.core.util
 
+import com.kylix.core.BuildKonfig
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.plugins.DefaultRequest
@@ -19,7 +20,7 @@ fun<T : HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultRequest(
     block: DefaultRequest.DefaultRequestBuilder.() -> Unit = {}
 ) {
     defaultRequest {
-        url("https://cookwithbeu.web.id/api/")
+        url(BuildKonfig.baseUrl)
         contentType(ContentType.Application.Json)
         block()
     }
