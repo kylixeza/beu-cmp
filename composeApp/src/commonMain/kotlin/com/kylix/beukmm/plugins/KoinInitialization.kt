@@ -2,7 +2,6 @@ package com.kylix.beukmm.plugins
 
 import com.kylix.auth.di.authModule
 import com.kylix.camera.di.cameraModule
-import com.kylix.camera.di.tfLitePlatformModule
 import com.kylix.core.di.dataStoreModule
 import com.kylix.core.di.dataStorePlatformModule
 import com.kylix.core.di.networkModule
@@ -36,7 +35,6 @@ fun installKoin(
             detailModule,
             reviewModule,
             cameraModule,
-            tfLitePlatformModule,
             profileModule,
             resetPasswordModule
         )

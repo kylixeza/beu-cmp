@@ -40,9 +40,7 @@ import com.kashif.cameraK.permissions.providePermissions
 import com.kashif.cameraK.result.ImageCaptureResult
 import com.kashif.cameraK.ui.CameraPreview
 import com.kylix.camera.components.PredictionResultBottomSheet
-import com.kylix.camera.tflite.TFLiteHelper
 import compose.icons.feathericons.Camera
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
@@ -56,7 +54,6 @@ object CameraTab: Tab {
         val navigator = LocalNavigator.currentOrThrow
         val navigatorParent = navigator.parent ?: return
 
-        val tfLiteHelper = koinInject<TFLiteHelper>()
         var cameraController by remember { mutableStateOf<CameraController?>(null) }
 
         val coroutineScope = rememberCoroutineScope()

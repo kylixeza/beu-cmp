@@ -62,11 +62,8 @@ android {
     }
     buildFeatures {
         compose = true
-        mlModelBinding = true
     }
 }
 dependencies {
     implementation(libs.androidx.benchmark.macro)
-    implementation(libs.tflite.support)
-    implementation(libs.tflite.metadata)
 }

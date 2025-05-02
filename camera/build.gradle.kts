@@ -23,10 +23,6 @@ kotlin {
 
 
     sourceSets {
-
-        androidMain.dependencies {
-            implementation(libs.bundles.tflite)
-        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -61,6 +57,5 @@ android {
     }
     buildFeatures {
         compose = true
-        mlModelBinding = true
     }
 }
