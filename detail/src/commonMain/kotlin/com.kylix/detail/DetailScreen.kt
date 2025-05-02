@@ -3,6 +3,7 @@ package com.kylix.detail
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,39 +76,45 @@ class DetailScreen(
                 screenModel.onFinishLoading()
             },
         ) { innerPadding ->
-            Column(
+            BoxWithConstraints(
                 modifier = Modifier.fillMaxSize().padding(innerPadding)
             ) {
-                if (detailState.recipe != null) {
-                    Card(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                            .height(210.dp),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
 
-                        VideoPlayerView(
-                            modifier = Modifier.fillMaxSize(),
-                            url = detailState.recipe?.video.orEmpty(),
-                            playerConfig = PlayerConfig(
-                                didEndVideo = {
-                                    screenModel.onVideoFinished()
-                                    screenModel.postHistory(recipeId)
-                                }
+                val maxHeight = remember { maxHeight }
+
+                Column(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    if (detailState.recipe != null) {
+                        Card(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .fillMaxWidth()
+                                .height(maxHeight * 0.38f),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            VideoPlayerView(
+                                modifier = Modifier.fillMaxSize(),
+                                url = detailState.recipe?.video.orEmpty(),
+                                playerConfig = PlayerConfig(
+                                    didEndVideo = {
+                                        screenModel.onVideoFinished()
+                                        screenModel.postHistory(recipeId)
+                                    }
+                                )
+                            )
+                        }
+
+                        Text(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            text = "Source: ${detailState.recipe?.videoSrc.orEmpty()}",
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontSize = 10.sp
                             )
                         )
+
+                        DetailTabNavigation(detailState)
                     }
-
-                    Text(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                        text = "Source: ${detailState.recipe?.videoSrc.orEmpty()}",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            fontSize = 10.sp
-                        )
-                    )
-
-                    DetailTabNavigation(detailState)
                 }
             }
         }
