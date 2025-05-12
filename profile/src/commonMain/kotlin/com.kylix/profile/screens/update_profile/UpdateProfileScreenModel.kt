@@ -72,6 +72,12 @@ class UpdateProfileScreenModel(
             )
         }
     }
+
+    fun setPickerState(open: Boolean) {
+        updateProfileState.update {
+            it.copy(openImagePicker = open)
+        }
+    }
 }
 
 data class UpdateProfileState(

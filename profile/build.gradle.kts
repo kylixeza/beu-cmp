@@ -52,6 +52,7 @@ kotlin {
             implementation(libs.peekaboo.image.picker)
             implementation(libs.lifecycle.tracker)
             implementation(libs.webview)
+            implementation(libs.chaintech.imagepickncrop)
 
             api(projects.common)
             api(projects.core)

@@ -168,7 +168,6 @@ class ReviewScreen(
             selectedImageCallback = {
                 screenModel.addImage(it)
             },
-            showGalleryOption = false
         )
 
         LaunchedEffect(key1 = uiState.isSuccess) {

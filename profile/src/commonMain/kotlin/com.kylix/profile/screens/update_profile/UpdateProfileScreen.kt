@@ -31,6 +31,7 @@ import beukmm.di.koinScreenModel
 import beukmm.profile.generated.resources.Res
 import beukmm.profile.generated.resources.ic_edit
 import beukmm.theme.White
+import beukmm.util.toJPGByteArray
 import cafe.adriel.voyager.core.lifecycle.ScreenDisposable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -40,6 +41,8 @@ import com.preat.peekaboo.image.picker.SelectionMode
 import com.preat.peekaboo.image.picker.rememberImagePickerLauncher
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import network.chaintech.cmpimagepickncrop.CMPImagePickNCropDialog
+import network.chaintech.cmpimagepickncrop.imagecropper.rememberImageCropper
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.decodeToImageBitmap
 import org.jetbrains.compose.resources.painterResource
@@ -57,17 +60,6 @@ class UpdateProfileScreen: Screen, ScreenDisposable {
         val navigator = LocalNavigator.currentOrThrow
 
         val lifecycleTracker = LocalLifecycleTracker.current
-
-        val scope = rememberCoroutineScope()
-        val singleImagePicker = rememberImagePickerLauncher(
-            selectionMode = SelectionMode.Single,
-            scope = scope,
-            onResult = { byteArrays ->
-                byteArrays.firstOrNull()?.let {
-                    screenModel.setNewAvatar(it)
-                }
-            }
-        )
 
         BaseScreenContent(
             topBar = {
@@ -114,7 +106,7 @@ class UpdateProfileScreen: Screen, ScreenDisposable {
                         contentDescription = "Edit",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.size(36.dp).align(Alignment.BottomEnd).clickable {
-                            singleImagePicker.launch()
+                            screenModel.setPickerState(true)
                         }
                     )
                 }
@@ -149,6 +141,17 @@ class UpdateProfileScreen: Screen, ScreenDisposable {
                 }
             }
         }
+
+        CMPImagePickNCropDialog(
+            imageCropper = rememberImageCropper(),
+            openImagePicker = updateProfileState.openImagePicker,
+            imagePickerDialogHandler = {
+                screenModel.setPickerState(it)
+            },
+            selectedImageCallback = {
+                screenModel.setNewAvatar(it.toJPGByteArray())
+            },
+        )
 
         LaunchedEffect(key1 = uiState.isSuccess) {
             if (uiState.isSuccess) {
