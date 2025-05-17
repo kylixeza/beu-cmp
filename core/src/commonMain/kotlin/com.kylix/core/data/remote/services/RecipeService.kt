@@ -21,7 +21,7 @@ class RecipeService(
     suspend fun getRecipesByCategory(categoryId: String) = client.get("recipes/categories/$categoryId")
 
     suspend fun classifyImage(image: ByteArray) = client.submitFormWithBinaryData(
-        url = "classify",
+        url = "recognition",
         formData = formData {
             append("image", image, Headers.build {
                 append("Content-Type", "image/jpeg")

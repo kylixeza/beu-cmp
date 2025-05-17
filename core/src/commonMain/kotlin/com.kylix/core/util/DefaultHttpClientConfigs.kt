@@ -31,7 +31,11 @@ fun<T : HttpClientEngineConfig> HttpClientConfig<T>.beuDefaultLogging(
 ) {
     install(Logging) {
         level = LogLevel.ALL
-        logger = Logger.DEFAULT
+        logger = object : Logger {
+            override fun log(message: String) {
+                co.touchlab.kermit.Logger.i { "HTTP Client: $message" }
+            }
+        }
         block()
     }
 }
