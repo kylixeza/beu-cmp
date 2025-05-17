@@ -14,3 +14,5 @@
 # Keep some classes used by CameraX extensions if needed
 -keepnames class androidx.camera.extensions.internal.** { *; }
 -keepnames class androidx.camera.extensions.internal.sessionprocessor.** { *; }
+
+-keep class androidx.camera.core.impl.CameraCaptureMetaData$** { *; }
