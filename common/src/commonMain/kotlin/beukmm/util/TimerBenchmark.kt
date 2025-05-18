@@ -25,7 +25,7 @@ class TimerBenchmark {
     fun convertToMinutes(timeInSecond: Int): String {
         val minutes = timeInSecond / 60
         val seconds = timeInSecond % 60
-        return "$minutes menit $seconds detik"
+        return "$minutes minutes $seconds seconds"
 
     }
 
